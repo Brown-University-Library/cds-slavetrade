@@ -1,0 +1,22 @@
+{
+  "name": "slavetradeapp",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Cole Hansen <cole_hansen@brown.edu>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bower-knockout-mapping": "^2.6.0"
+  }
+}

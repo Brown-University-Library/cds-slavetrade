@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indigenous Slave Trade Records</title>
+</head>
+<body>
+  <header>
+    Indigenous Slave Trade &nbsp; &nbsp; &nbsp; &nbsp; Admin &nbsp; &nbsp; &nbsp; &nbsp; Logout
+  </header>
+  <article data-bind="visible: showHome">
+    <section id="user">
+      <h1>Hello <span data-bind="text: user().givenName"></span></h1>
+    </section>
+    <section id="tables">
+      <article id="drafts">
+        <h2>Drafts</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Modified</th>
+              <th>Updated By</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: getEntries('Draft')">
+            <tr data-bind="click: $parent.edit">
+              <td data-bind="text: displayName"></td>
+              <td data-bind="text: meta.lastModified"></td>
+              <td data-bind="text: meta.updatedBy"></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article id="internal">
+        <h2>Internal Entries</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Modified</th>
+              <th>Updated By</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: getEntries('Internal')">
+            <tr data-bind="click: $parent.edit">
+              <td data-bind="text: displayName"></td>
+              <td data-bind="text: meta.astModified"></td>
+              <td data-bind="text: meta.updatedBy"></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <article id="public">
+        <h2>Public Entries</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Modified</th>
+              <th>Updated By</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: getEntries('Public')">
+            <tr data-bind="click: $parent.edit">
+              <td data-bind="text: displayName"></td>
+              <td data-bind="text: meta.lastModified"></td>
+              <td data-bind="text: meta.updatedBy"></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </article>
+
+  <article id="entry" data-bind="with: editEntry">
+    <section id="id">This is entry <span data-bind="text: _id"></span></section>
+    <section id="meta-data">
+      Last Modified: <span data-bind="text: meta.lastModified()"></span>
+    </section>
+    <section id="date">
+      Year: <input data-bind="textInput: date.year" /><br>
+      Month: <input data-bind="value: date.month" /><br>
+      Day: <input data-bind="value: date.day" /><br>
+    </section>
+    <section id="indigenousName">
+      Indigenous Name: <input data-bind="value: indigenousName" /><br>
+    </section>
+    <section id="baptismalName">
+      <strong>Baptismal Name</strong><br>
+      Given Name: <input data-bind="value: baptismalName.givenName" /><br>
+      Family Name: <input data-bind="value: baptismalName.familyName" /><br>
+    </section>
+    <section id="tribe">
+      Tribe: <input data-bind="value: tribe" /><br>
+    </section>
+    <section id="origin">
+      Origin: <input data-bind="value: origin" /><br>
+    </section>
+    <section id="sex">
+      Sex: <input data-bind="value: sex" /><br>
+    </section>
+    <section id="age">
+      Age: <input data-bind="value: age" /><br>
+    </section>
+    <section id="mannerOfEnslavement">
+      Manner of Enslavement: <input data-bind="value: mannerOfEnslavement" /><br>
+    </section>
+    <section id="owner">
+      <strong>Owner</strong><br>
+      Title: <input data-bind="value: owner.title" /><br>
+      Given Name: <input data-bind="value: owner.givenName" /><br>
+      Family Name: <input data-bind="value: owner.familyName" /><br>
+    </section>
+    <section id="partner">
+      <strong>Partner</strong><br>
+      In Database: <input data-bind="value: partner.isDatabase" /><br>
+      Given Name: <input data-bind="value: partner.givenName" /><br>
+      Family Name: <input data-bind="value: partner.familyName" /><br>
+    </section>
+    <section id="submission">
+      <button data-bind="click: $parent.save">Save</button>
+      <button data-bind="click: $parent.cancel">Cancel</button>
+    </section>
+  </article>
+
+  <footer>
+
+  </footer>
+  <script type='text/javascript' src='bower_components/knockout/dist/knockout.debug.js'></script>
+  <script type='text/javascript' src='bower_components/bower-knockout-mapping/dist/knockout.mapping.js'></script>
+  <script type='text/javascript' src='home-bundle.js'></script>
+</body>
+</html>
