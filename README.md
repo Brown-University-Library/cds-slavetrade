@@ -4,7 +4,9 @@ Files related to the collaboration between [Linford Fisher](https://vivo.brown.e
 # Running in dev
 Make sure you have node and yarn (or npm) installed.
 
-Then run, "yarn run dev"
+First run, "yarn install".
+
+Then run, "yarn run dev" (you may need to first create a dist directory. I'm not 100% sure off the top of my head).
 
 It will start a webpack dev server on port 3000.
 
