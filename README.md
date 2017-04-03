@@ -1,1 +1,2 @@
-# cds-slavetrade
+# Indigenous Slave Trade Database
+Files related to the collaboration between [Linford Fisher](https://vivo.brown.edu/display/lf7) in the Department of History at [Brown University](http://www.brown.edu) and the [Brown University Library's](http://library.brown.edu/) [Center for Digital Scholarship](http://cds.library.brown.edu/).
