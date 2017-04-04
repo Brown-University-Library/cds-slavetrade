@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import {_entries, users} from '../Data.js'
 import Entry from '../viewmodels/Entry.js';
+const uuidV4 = require('uuid/v4');
+const base32 = require('base32');
 
 const DRAFT = "Draft",
       INTERNAL = "Internal",
@@ -8,7 +10,6 @@ const DRAFT = "Draft",
 
 let getEntries = function(callback) {
   // TODO: get entries from server
-  console.log(_entries);
   callback(_entries);
 }
 
@@ -22,7 +23,6 @@ let DataEntryViewModel = function() {
 
   // initializing data
   getEntries((entries) => {
-    console.log("called", entries);
     _.forEach(entries, (item) => {
       let entry = ko.observable(new Entry(item));
       self.entries.push(entry);
@@ -40,8 +40,6 @@ let DataEntryViewModel = function() {
       //     console.log(new Error("Stage not found"));
       //}
     });
-
-    console.log("test", self.entries());
   });
 
   self.showHome = ko.observable(true);
@@ -49,9 +47,7 @@ let DataEntryViewModel = function() {
   self.copyOfEntryToEdit = null;
 
   self.getEntries = function(stage) {
-    console.log(stage);
     return ko.utils.arrayFilter(self.entries(), (entry) => {
-      console.log(entry());
       return entry().meta.stage() == stage;
     });
   }
@@ -75,14 +71,19 @@ let DataEntryViewModel = function() {
   }
 
   self.cancel = function() {
-    // find the entry that was edited
-    let entry = ko.utils.arrayFirst(self.entries(), (item) => {
-      return item()._id() == self.copyOfEntryToEdit._id;
-    });
-    // set the data in entry to be the old data
-    entry(new Entry(self.copyOfEntryToEdit));
-    // reset the old data to null
-    self.copyOfEntryToEdit = null;
+    if (self.copyOfEntryToEdit) {
+      // find the entry that was edited
+      let entry = ko.utils.arrayFirst(self.entries(), (item) => {
+        return item()._id() == self.copyOfEntryToEdit._id;
+      });
+      // set the data in entry to be the old data
+      entry(new Entry(self.copyOfEntryToEdit));
+      // reset the old data to null
+      self.copyOfEntryToEdit = null;
+    } else {
+      // new entry canceled
+      // TODO: figure this out
+    }
     // get rid of the edit form from view
     self.editEntry(null);
     // show the welcome message and tables again
@@ -100,6 +101,42 @@ let DataEntryViewModel = function() {
     self.editEntry(null);
     // show the welcome message and tables again
     self.showHome(true);
+  }
+
+  // hack-y function
+  let resetObservables = function(object, defaultValue) {
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        var property = object[key];
+        if (ko.isWriteableObservable(property)) {
+          property(defaultValue);
+        } else if (property instanceof Object) {
+          resetObservables(property, defaultValue);
+        }
+      }
+    }
+  }
+
+  self.newEntry = function() {
+    // little hack to get all the properties attached to the viewmodels
+    // without needing to predefine all of them in a model.js file
+    let entryJS = ko.mapping.toJS(self.entries()[0]);
+    let entry = ko.observable(new Entry(entryJS));
+    resetObservables(entry, "");
+
+    // set the default stage
+    entry().meta.stage(DRAFT);
+    // generate a new ID
+    entry()._id(base32.encode(uuidV4()));
+
+    // add it to the array of entries
+    // TODO: allow for cancel/delete
+    self.entries.push(entry);
+
+    // show the edit form
+    self.editEntry(entry());
+    // hide the tables and welcome message
+    self.showHome(false);
   }
 }
 

@@ -2,19 +2,35 @@
 <html>
 <head>
   <title>Indigenous Slave Trade Records</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
-    Indigenous Slave Trade &nbsp; &nbsp; &nbsp; &nbsp; Admin &nbsp; &nbsp; &nbsp; &nbsp; Logout
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Indigenous Slave Trade Database</a>
+        </div>
+        <ul class="nav navbar-nav nav-tabs navbar-right">
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Admin</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
   </header>
-  <article data-bind="visible: showHome">
+  <article data-bind="visible: showHome" class="container">
     <section id="user">
       <h1>Hello <span data-bind="text: user().givenName"></span></h1>
+      <p>Lorem Ipsum Dolor</p>
+      <button data-bind="click: newEntry" class="btn btn-primary">New Entry</button>
     </section>
-    <section id="tables">
-      <article id="drafts">
+    <section id="tables" class="row">
+      <article id="drafts" class="col-xs-12">
         <h2>Drafts</h2>
-        <table>
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
@@ -31,9 +47,9 @@
           </tbody>
         </table>
       </article>
-      <article id="internal">
+      <article id="internal" class="col-xs-12">
         <h2>Internal Entries</h2>
-        <table>
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
@@ -50,9 +66,9 @@
           </tbody>
         </table>
       </article>
-      <article id="public">
+      <article id="public" class="col-xs-12">
         <h2>Public Entries</h2>
-        <table>
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>Name</th>
@@ -72,55 +88,117 @@
     </section>
   </article>
 
-  <article id="entry" data-bind="with: editEntry">
-    <section id="id">This is entry <span data-bind="text: _id"></span></section>
-    <section id="meta-data">
-      Last Modified: <span data-bind="text: meta.lastModified()"></span>
-    </section>
-    <section id="date">
-      Year: <input data-bind="textInput: date.year" /><br>
-      Month: <input data-bind="value: date.month" /><br>
-      Day: <input data-bind="value: date.day" /><br>
-    </section>
-    <section id="indigenousName">
-      Indigenous Name: <input data-bind="value: indigenousName" /><br>
-    </section>
-    <section id="baptismalName">
-      <strong>Baptismal Name</strong><br>
-      Given Name: <input data-bind="value: baptismalName.givenName" /><br>
-      Family Name: <input data-bind="value: baptismalName.familyName" /><br>
-    </section>
-    <section id="tribe">
-      Tribe: <input data-bind="value: tribe" /><br>
-    </section>
-    <section id="origin">
-      Origin: <input data-bind="value: origin" /><br>
-    </section>
-    <section id="sex">
-      Sex: <input data-bind="value: sex" /><br>
-    </section>
-    <section id="age">
-      Age: <input data-bind="value: age" /><br>
-    </section>
-    <section id="mannerOfEnslavement">
-      Manner of Enslavement: <input data-bind="value: mannerOfEnslavement" /><br>
-    </section>
-    <section id="owner">
-      <strong>Owner</strong><br>
-      Title: <input data-bind="value: owner.title" /><br>
-      Given Name: <input data-bind="value: owner.givenName" /><br>
-      Family Name: <input data-bind="value: owner.familyName" /><br>
-    </section>
-    <section id="partner">
-      <strong>Partner</strong><br>
-      In Database: <input data-bind="value: partner.isDatabase" /><br>
-      Given Name: <input data-bind="value: partner.givenName" /><br>
-      Family Name: <input data-bind="value: partner.familyName" /><br>
-    </section>
-    <section id="submission">
-      <button data-bind="click: $parent.save">Save</button>
-      <button data-bind="click: $parent.cancel">Cancel</button>
-    </section>
+  <article id="entry" data-bind="with: editEntry" class="container">
+    <form class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <section id="id"><h3>This is entry <span data-bind="text: _id"></span></h3></section>
+        <section id="meta-data">
+          <em>Last Modified: <span data-bind="text: meta.lastModified()"></span></em>
+        </section>
+        <section id="date">
+          <div class="form-group">
+            <label for="year">Year:</label>
+            <input data-bind="textInput: date.year" name="year" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="month">Month:</label>
+            <input data-bind="value: date.month" name="month" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="day">Day:</label>
+            <input data-bind="value: date.day" name="day" class="form-control" />
+          </div>
+        </section>
+        <section id="indigenousName">
+          <div class="form-group">
+            <label for="iname">Indigenous Name:</label>
+            <input data-bind="value: indigenousName" name="iname" class="form-control" />
+          </div>
+        </section>
+        <section id="baptismalName">
+          <strong>Baptismal Name</strong><br>
+          <div style="padding-left:10px">
+            <div class="form-group">
+              <label for="givenname">Given Name:</label>
+              <input data-bind="value: baptismalName.givenName" name="givenname" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="familyname">Family Name:</label>
+              <input data-bind="value: baptismalName.familyName" name="familyname" class="form-control" />
+            </div>
+          </div>
+        </section>
+        <section id="tribe">
+          <div class="form-group">
+            <label for="tribe">Tribe:</label>
+            <input data-bind="value: tribe" name="tribe" class="form-control" />
+          </div>
+        </section>
+        <section id="origin">
+          <div class="form-group">
+            <label for="origin">Origin:</label>
+            <input data-bind="value: origin" name="origin" class="form-control" />
+          </div>
+        </section>
+        <section id="sex">
+          <div class="form-group">
+            <label for="sex">Sex:</label>
+            <input data-bind="value: sex" name="sex" class="form-control" />
+          </div>
+        </section>
+        <section id="age">
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input data-bind="value: age" name="age" class="form-control" />
+          </div>
+        </section>
+        <section id="mannerOfEnslavement">
+          <div class="form-group">
+            <label for="mannerOfEnslavement">Manner of Enslavement:</label>
+            <input data-bind="value: mannerOfEnslavement" name="mannerOfEnslavement" class="form-control" />
+          </div>
+        </section>
+        <section id="owner">
+          <strong>Owner</strong><br>
+          <div style="padding-left: 10px">
+            <div class="form-group">
+              <label for="ownerTitle">Title:</label>
+              <input data-bind="value: owner.title" name="ownerTitle" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="ownerGivenName">Given Name:</label>
+              <input data-bind="value: owner.givenName" name="ownerGivenName" class="form-control" /><br>
+            </div>
+            <div class="form-group">
+              <label for="ownerFamilyName">Family Name:</label>
+              <input data-bind="value: owner.familyName" name="ownerFamilyName" class="form-control" /><br>
+            </div>
+          </div>
+        </section>
+        <section id="partner">
+          <strong>Partner</strong><br>
+          <div style="padding-left: 10px">
+            <div class="form-group">
+              <label for="partnerInDatabase">In Database:</label>
+              <input data-bind="value: partner.isDatabase" name="partnerInDatabase" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="partnerGivenName">Given Name:</label>
+              <input data-bind="value: partner.givenName" name="partnerGivenName" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="partnerFamilyName">Family Name:</label>
+              <input data-bind="value: partner.familyName" name="partnerFamilyName" class="form-control" />
+            </div>
+        </section>
+        <section id="submission">
+          <button data-bind="click: $parent.save" class="btn btn-success">Save</button>
+          <button data-bind="click: $parent.cancel" class="btn btn-default">Cancel</button>
+        </section>
+      </div>
+      <div class="col-xs-3"></div>
+    </form>
   </article>
 
   <footer>

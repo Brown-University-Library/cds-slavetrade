@@ -7,9 +7,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "base32": "^0.0.6",
     "copy-webpack-plugin": "^4.0.1",
     "html-loader": "^0.4.5",
     "lodash": "^4.17.4",
+    "uuid": "^3.0.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
