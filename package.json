@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --host 0.0.0.0 --port 3000 -d -w --content-base ./dist --watch-content-base\""
+    "dev": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --host 0.0.0.0 --port 3000 -d -w --content-base ./dist --watch-content-base\"",
+    "server-dev": "webpack; nodemon ./src/server.js"
   },
   "license": "MIT",
   "dependencies": {
     "base32": "^0.0.6",
     "copy-webpack-plugin": "^4.0.1",
+    "hapi": "^16.1.1",
     "html-loader": "^0.4.5",
+    "inert": "^4.2.0",
     "lodash": "^4.17.4",
+    "path": "^0.12.7",
     "uuid": "^3.0.1",
     "webpack": "^2.2.1"
   },
