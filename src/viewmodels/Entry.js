@@ -19,6 +19,14 @@ let EntryViewModel = function(data) {
   self.save = function() {
     // TODO: post to server
     self.meta.lastModified(getCurrentDate());
+    $.ajax({
+      url: "/api/v1/entries",
+      method: "PUT",
+      data: {entry: ko.mapping.toJSON(self)}
+    })
+    .done((data) => {
+      console.log(data);
+    });
     console.log("save");
   }
 
