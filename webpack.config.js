@@ -1,18 +1,18 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
+const Path = require('path');
 
 module.exports = {
   entry: {
-    home: path.resolve(__dirname, 'src/viewmodels/DataEntry.js')
+    home: Path.resolve(__dirname, 'src/viewmodels/DataEntry.js')
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: Path.resolve(__dirname, 'dist', 'client'),
     filename: '[name]-bundle.js'
   },
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'src/views/home.html')
+        from: Path.resolve(__dirname, 'src/views/home.html')
       }
     ])
   ],

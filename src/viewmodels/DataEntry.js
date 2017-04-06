@@ -9,8 +9,14 @@ const DRAFT = "Draft",
       PUBLIC = "Public";
 
 let getEntries = function(callback) {
-  // TODO: get entries from server
-  callback(_entries);
+  // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
+  // this should probably be changed, maybe use bower?
+
+  $.get('/api/v1/entries', (data) => {
+    console.log(data);
+    let entries = JSON.parse(data);
+    callback(entries);
+  });
 }
 
 let DataEntryViewModel = function() {

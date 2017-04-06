@@ -20,7 +20,7 @@ server.register(require('inert'), (err) => {
     path: '/{param*}',
     handler: {
       directory: {
-        path: Path.resolve(__dirname, '../dist'),
+        path: Path.resolve(__dirname, '../dist/client'),
         index: "home.html"
       }
     }
