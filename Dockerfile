@@ -2,4 +2,4 @@ FROM kkarczmarczyk/node-yarn
 
 ADD . .
 
-CMD ["yarn", "run", "dev"]
+CMD ["sh", "-c", "yarn install; yarn run server-dev"]
