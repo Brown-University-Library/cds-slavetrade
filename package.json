@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --host 0.0.0.0 --port 3000 -d -w --content-base ./dist/client --watch-content-base\"",
+    "bower": "bower --allow-root install",
     "server-dev": "webpack; nodemon ./src/server.js"
   },
   "license": "MIT",
