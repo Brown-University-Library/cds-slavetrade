@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "base32": "^0.0.6",
+    "bower": "^1.8.0",
     "copy-webpack-plugin": "^4.0.1",
     "hapi": "^16.1.1",
     "html-loader": "^0.4.5",
