@@ -120,11 +120,11 @@
           <strong>Baptismal Name</strong><br>
           <div style="padding-left:10px">
             <div class="form-group">
-              <label for="givenname">Given Name:</label>
+              <label for="givenname">First Name:</label>
               <input data-bind="value: baptismalName.givenName" name="givenname" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="familyname">Family Name:</label>
+              <label for="familyname">Last Name:</label>
               <input data-bind="value: baptismalName.familyName" name="familyname" class="form-control" />
             </div>
           </div>
@@ -159,6 +159,24 @@
             <input data-bind="value: mannerOfEnslavement" name="mannerOfEnslavement" class="form-control" />
           </div>
         </section>
+        <section id="stringLocation">
+          <div class="form-group">
+            <label for="stringLocation">Location:</label>
+            <input data-bind="value: stringLocation" name="stringLocation" class="form-control" />
+          </div>
+        </section>
+        <section id="colonyState">
+          <div class="form-group">
+            <label for="colonyState">Colony/State:</label>
+            <input data-bind="value: colonyState" name="colonyState" class="form-control" />
+          </div>
+        </section>
+        <section id="nationalContext">
+          <div class="form-group">
+            <label for="nationalContext">National Context:</label>
+            <input data-bind="value: nationalContext" name="nationalContext" class="form-control" />
+          </div>
+        </section>
         <section id="owner">
           <strong>Owner</strong><br>
           <div style="padding-left: 10px">
@@ -167,11 +185,11 @@
               <input data-bind="value: owner.title" name="ownerTitle" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="ownerGivenName">Given Name:</label>
+              <label for="ownerGivenName">First Name:</label>
               <input data-bind="value: owner.givenName" name="ownerGivenName" class="form-control" /><br>
             </div>
             <div class="form-group">
-              <label for="ownerFamilyName">Family Name:</label>
+              <label for="ownerFamilyName">Last Name:</label>
               <input data-bind="value: owner.familyName" name="ownerFamilyName" class="form-control" /><br>
             </div>
           </div>
@@ -184,13 +202,37 @@
               <input data-bind="value: partner.isDatabase" name="partnerInDatabase" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="partnerGivenName">Given Name:</label>
+              <label for="partnerGivenName">First Name:</label>
               <input data-bind="value: partner.givenName" name="partnerGivenName" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="partnerFamilyName">Family Name:</label>
+              <label for="partnerFamilyName">Last Name:</label>
               <input data-bind="value: partner.familyName" name="partnerFamilyName" class="form-control" />
             </div>
+        </section>
+        <section id="sourceType">
+          <div class="form-group">
+            <label for="sourceType">Source Type:</label>
+            <input data-bind="value: sourceType" name="sourceType" class="form-control" />
+          </div>
+        </section>
+        <section id="recordType">
+          <div class="form-group">
+            <label for="recordType">Record Type:</label>
+            <input data-bind="value: recordType" name="recordType" class="form-control" />
+          </div>
+        </section>
+        <section id="additionalInfo">
+          <div class="form-group">
+            <label for="additionalInfo">Additional Info:</label>
+            <input data-bind="value: additionalInfo" name="additionalInfo" class="form-control" />
+          </div>
+        </section>
+        <section id="researcherNotes">
+          <div class="form-group">
+            <label for="researcherNotes">Researcher Notes:</label>
+            <textarea data-bind="value: researcherNotes" name="researcherNotes" class="form-control"></textarea>
+          </div>
         </section>
         <section id="submission">
           <button data-bind="click: $parent.save" class="btn btn-success">Save</button>

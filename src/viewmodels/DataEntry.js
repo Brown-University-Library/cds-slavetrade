@@ -46,6 +46,49 @@ let DataEntryViewModel = function() {
       //     console.log(new Error("Stage not found"));
       //}
     });
+
+    self.blank = new Entry({
+      "_id" : "",
+      "meta" : {
+        "stage": "", // Public, Internal, Draft
+        "prevVersions": [], //objectIDs
+        "updatedBy": "", //user
+        "lastModified": "",
+        "usersWithAccess": [] //users (only used in Internal stage)
+      },
+      "date" : {
+        "year" : "",
+        "month" : "",
+        "day" : ""
+      },
+      "indigenousName" : "",
+      "baptismalName" : {
+        "givenName" : "",
+        "familyName" : ""
+      },
+      "tribe" : "",
+      "origin" : "",
+      "sex" : "",
+      "age" : "",
+      "mannerOfEnslavement" : "",
+      "owner" : {
+        "title" : "",
+        "givenName" : "",
+        "familyName" : ""
+      },
+      "stringLocation": "",
+      "colonyState": "",
+      "nationalContext": "",
+      "partner" : {
+        "inDatabase" : false,
+        "givenName" : "",
+        "familyName" : ""
+      },
+      "sourceType": "",
+      "recordType": "",
+      "additionalInfo": "",
+      "researcherNotes": ""
+    });
   });
 
   self.showHome = ko.observable(true);
@@ -126,8 +169,12 @@ let DataEntryViewModel = function() {
   self.newEntry = function() {
     // little hack to get all the properties attached to the viewmodels
     // without needing to predefine all of them in a model.js file
-    let entryJS = ko.mapping.toJS(self.entries()[0]);
+    console.log(self, self.entries());
+    // need edge case for empty entries
+    let entryJS = ko.mapping.toJS(self.blank); //(self.entries() && self.entries()[0]));
     let entry = ko.observable(new Entry(entryJS));
+
+    // might not be needed now
     resetObservables(entry, "");
 
     // set the default stage
