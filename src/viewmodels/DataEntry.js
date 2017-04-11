@@ -19,6 +19,18 @@ let getEntries = function(callback) {
   });
 }
 
+let getOptions = function(callback) {
+  // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
+  // this should probably be changed, maybe use bower?
+
+  console.log("HIHIHIH");
+  $.get('/api/v1/options', (data) => {
+    console.log(data);
+    let options = JSON.parse(data);
+    callback(options);
+  });
+}
+
 let DataEntryViewModel = function() {
   let self = this;
 
@@ -45,6 +57,13 @@ let DataEntryViewModel = function() {
       //   default:
       //     console.log(new Error("Stage not found"));
       //}
+    });
+
+    getOptions((options) => {
+      console.log("hi",options);
+      self.sexOptions = ko.observableArray(options.sex);
+      self.monthOptions = ko.observableArray(options.month);
+      self.tribeOptions = ko.observableArray(options.tribe);
     });
 
     self.blank = new Entry({
@@ -107,7 +126,6 @@ let DataEntryViewModel = function() {
   self.edit = function(entry) {
     // entry argument is not observable
 
-    // TODO: figure out how to search all entries
     let entryToEdit = ko.utils.arrayFirst(self.entries(), (item) => {
       return item()._id() == entry._id();
     });
@@ -174,7 +192,7 @@ let DataEntryViewModel = function() {
     let entryJS = ko.mapping.toJS(self.blank); //(self.entries() && self.entries()[0]));
     let entry = ko.observable(new Entry(entryJS));
 
-    // might not be needed now
+    // NOTE: might not be needed now
     resetObservables(entry, "");
 
     // set the default stage
