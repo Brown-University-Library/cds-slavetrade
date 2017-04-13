@@ -64,6 +64,8 @@ let DataEntryViewModel = function() {
       self.sexOptions = ko.observableArray(options.sex);
       self.monthOptions = ko.observableArray(options.month);
       self.tribeOptions = ko.observableArray(options.tribe);
+      self.originOptions = ko.observableArray(options.origin);
+      self.mannerOfEnslavementOptions = ko.observableArray(options.mannerOfEnslavement);
     });
 
     self.blank = new Entry({

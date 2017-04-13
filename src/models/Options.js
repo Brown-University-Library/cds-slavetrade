@@ -5,7 +5,9 @@ const OptionsSchema = new Schema({
     _id: String,
     sex: [String],
     month: [String],
-    tribe: [String]
+    tribe: [String],
+    origin: [String],
+    mannerOfEnslavement: [String]
 });
 
 

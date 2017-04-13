@@ -132,13 +132,14 @@
         <section id="tribe">
           <div class="form-group">
             <label for="tribe">Tribe:</label>
-            <input data-bind="value: tribe" name="tribe" class="form-control" />
+            <select data-bind="options: $parent.tribeOptions, value: tribe" name="tribe" class="form-control"></select>
           </div>
         </section>
         <section id="origin">
           <div class="form-group">
             <label for="origin">Origin:</label>
-            <input data-bind="value: origin" name="origin" class="form-control" />
+            <select data-bind="options: $parent.originOptions, value: origin" name="origin" class="form-control"></select>
+            <!--<input data-bind="value: origin" name="origin" class="form-control" />-->
           </div>
         </section>
         <section id="sex">
@@ -155,8 +156,8 @@
         </section>
         <section id="mannerOfEnslavement">
           <div class="form-group">
-            <label for="mannerOfEnslavement">Type/Kind of Slavery:</label>
-            <input data-bind="value: mannerOfEnslavement" name="mannerOfEnslavement" class="form-control" />
+            <label for="mannerOfEnslavement">Type/Kind of Enslavement:</label>
+            <select data-bind="options: $parent.mannerOfEnslavementOptions, value: mannerOfEnslavement" name="mannerOfEnslavement" class="form-control"></select>
           </div>
         </section>
         <section id="stringLocation">
@@ -225,7 +226,7 @@
         <section id="additionalInfo">
           <div class="form-group">
             <label for="additionalInfo">Additional Info:</label>
-            <input data-bind="value: additionalInfo" name="additionalInfo" class="form-control" />
+            <textarea data-bind="value: additionalInfo" name="additionalInfo" class="form-control"></textarea>
           </div>
         </section>
         <section id="researcherNotes">
