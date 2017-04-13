@@ -23,7 +23,6 @@ let getOptions = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
   // this should probably be changed, maybe use bower?
 
-  console.log("HIHIHIH");
   $.get('/api/v1/options', (data) => {
     console.log(data);
     let options = JSON.parse(data);
@@ -60,7 +59,6 @@ let DataEntryViewModel = function() {
     });
 
     getOptions((options) => {
-      console.log("hi",options);
       self.sexOptions = ko.observableArray(options.sex);
       self.monthOptions = ko.observableArray(options.month);
       self.tribeOptions = ko.observableArray(options.tribe);

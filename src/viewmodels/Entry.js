@@ -17,7 +17,7 @@ let EntryViewModel = function(data) {
   });
 
   self.save = function() {
-    // TODO: post to server
+    console.log(self.stringLocation);
     self.meta.lastModified(getCurrentDate());
     $.ajax({
       url: "/api/v1/entries",
