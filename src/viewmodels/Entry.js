@@ -7,10 +7,54 @@ let getCurrentDate = function() {
   return date.toLocaleString("en-us");
 }
 
+const blank = {
+  "_id" : "",
+  "meta" : {
+    "stage": "", // Public, Internal, Draft
+    "prevVersions": [], //objectIDs
+    "updatedBy": "", //user
+    "lastModified": "",
+    "usersWithAccess": [] //users (only used in Internal stage)
+  },
+  "date" : {
+    "year" : "",
+    "month" : "",
+    "day" : ""
+  },
+  "indigenousName" : "",
+  "baptismalName" : {
+    "givenName" : "",
+    "familyName" : ""
+  },
+  "tribe" : "",
+  "origin" : "",
+  "sex" : "",
+  "age" : "",
+  "mannerOfEnslavement" : "",
+  "owner" : {
+    "title" : "",
+    "givenName" : "",
+    "familyName" : ""
+  },
+  "stringLocation": "",
+  "colonyState": "",
+  "nationalContext": "",
+  "partner" : {
+    "inDatabase" : false,
+    "givenName" : "",
+    "familyName" : ""
+  },
+  "sourceType": "",
+  "recordType": "",
+  "additionalInfo": "",
+  "researcherNotes": ""
+}
+
 let EntryViewModel = function(data) {
   let self = this;
 
-  self = ko.mapping.fromJS(data, {});
+  self = ko.mapping.fromJS(blank, {});
+  ko.mapping.fromJS(data, {}, self);
 
   self.displayName = ko.computed(function() {
     return self.indigenousName() || (self.baptismalName && (self.baptismalName.givenName() + " " + self.baptismalName.familyName())) || 'No Name';
