@@ -36,7 +36,46 @@ let DataEntryViewModel = function() {
   let draftEntries = [];
   let internalEntries = [];
   let publicEntries = [];
-  self.entries = ko.observableArray([]);
+  self.entries = ko.observableArray();
+  self.sexOptions = ko.observableArray();
+  self.monthOptions = ko.observableArray();
+  self.tribeOptions = ko.observableArray();
+  self.originOptions = ko.observableArray();
+  self.mannerOfEnslavementOptions = ko.observableArray();
+  self.addOption = function(category) {
+    console.log("hi");
+    console.log(self, category, self[category + 'Options']);
+    let listToAdd = self[category + 'Options'];
+    listToAdd.push(ko.observable());
+  }
+
+  self.saveOptions = function() {
+    let payload = {
+      sex: ko.mapping.toJS(self.sexOptions),
+      month: ko.mapping.toJS(self.monthOptions),
+      tribe: ko.mapping.toJS(self.tribeOptions),
+      origin: ko.mapping.toJS(self.originOptions),
+      mannerOfEnslavement: ko.mapping.toJS(self.mannerOfEnslavementOptions)
+    };
+    console.log(payload, JSON.stringify(payload));
+    $.ajax({
+      url: "/api/v1/options",
+      method: "PUT",
+      data: {options: JSON.stringify(payload)}
+    })
+    .done((data) => {
+      console.log(data);
+    });
+    console.log("save");
+  }
+
+  self.deleteOption = function(category, option) {
+    let listToRemove = self[category + 'Options'];
+    listToRemove.remove((item) => {
+      return item() == option;
+    });
+    self.saveOptions();
+  }
 
   // initializing data
   getEntries((entries) => {
@@ -59,11 +98,21 @@ let DataEntryViewModel = function() {
     });
 
     getOptions((options) => {
-      self.sexOptions = ko.observableArray(options.sex);
-      self.monthOptions = ko.observableArray(options.month);
-      self.tribeOptions = ko.observableArray(options.tribe);
-      self.originOptions = ko.observableArray(options.origin);
-      self.mannerOfEnslavementOptions = ko.observableArray(options.mannerOfEnslavement);
+      for (let i = 0; i < options.sex.length; ++i) {
+        self.sexOptions.push(ko.observable(options.sex[i]));
+      }
+      for (let i = 0; i < options.month.length; ++i) {
+        self.monthOptions.push(ko.observable(options.month[i]));
+      }
+      for (let i = 0; i < options.tribe.length; ++i) {
+        self.tribeOptions.push(ko.observable(options.tribe[i]));
+      }
+      for (let i = 0; i < options.origin.length; ++i) {
+        self.originOptions.push(ko.observable(options.origin[i]));
+      }
+      for (let i = 0; i < options.mannerOfEnslavement.length; ++i) {
+        self.mannerOfEnslavementOptions.push(ko.observable(options.mannerOfEnslavement[i]));
+      }
     });
 
     self.blank = new Entry({

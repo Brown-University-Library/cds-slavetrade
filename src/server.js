@@ -24,6 +24,16 @@ server.register(require('inert'), (err) => {
         index: "home.html"
       }
     }
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/admin',
+    handler: {
+      file: function (request) {
+        return Path.resolve(__dirname, '../dist/client', 'admin.html')
+      }
+    }
   })
 
   server.start((err) => {

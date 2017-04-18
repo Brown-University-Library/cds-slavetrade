@@ -13,6 +13,9 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: Path.resolve(__dirname, 'src/views/home.html')
+      },
+      {
+        from: Path.resolve(__dirname, 'src/views/admin.html')
       }
     ])
   ],

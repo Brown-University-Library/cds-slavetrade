@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indigenous Slave Trade Records - Admin</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Indigenous Slave Trade Database</a>
+        </div>
+        <ul class="nav navbar-nav nav-tabs navbar-right">
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <article data-bind="visible: showHome" class="container">
+    <section id="user">
+      <h1>Hello <span data-bind="text: user().givenName"></span></h1>
+      <p>Lorem Ipsum Dolor</p>
+    </section>
+  </article>
+  <article id="adminPanel">
+    <div class="col-xs-3"></div>
+    <section id="dropdownOptions" class="col-xs-6">
+      <!-- TODO: I would love to make these templates or bindings -->
+      <h2>Drop Down Options</h2>
+      <article class="row">
+        <div class="form-group">
+          <h3>Sex</h3>
+          <ul data-bind="foreach: sexOptions">
+            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'sex')" class="btn btn-danger">DELETE</button></span></div></li>
+          </ul>
+          <button data-bind="click: function() {addOption('sex')}" class="btn btn-default">Add Sex Option</button>
+        </div>
+      </article>
+      <article class="row">
+        <div class="form-group">
+          <h3>Tribe</h3>
+          <ul data-bind="foreach: tribeOptions">
+            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'tribe')" class="btn btn-danger">DELETE</button></span></div></li>
+          </ul>
+          <button data-bind="click: function() {addOption('tribe')}" class="btn btn-default">Add Tribe Option</button>
+        </div>
+      </article>
+      <article class="row">
+        <div class="form-group">
+          <h3>Origin</h3>
+          <ul data-bind="foreach: originOptions">
+            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
+          </ul>
+          <button data-bind="click: function() {addOption('origin')}" class="btn btn-default">Add Origin Option</button>
+        </div>
+      </article>
+      <article class="row">
+        <div class="form-group">
+          <h3>Type/Kind of Enslavement</h3>
+          <ul data-bind="foreach: mannerOfEnslavementOptions">
+            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
+          </ul>
+          <button data-bind="click: function() {addOption('mannerOfEnslavement')}" class="btn btn-default">Add Type/Kind of Enslavement Option</button>
+        </div>
+      </article>
+    </section>
+    <div class="col-xs-3"></div>
+  </article>
+
+  <footer>
+
+  </footer>
+  <script type='text/javascript' src='bower_components/knockout/dist/knockout.debug.js'></script>
+  <script type='text/javascript' src='bower_components/bower-knockout-mapping/dist/knockout.mapping.js'></script>
+  <script type='text/javascript' src='home-bundle.js'></script>
+</body>
+</html>

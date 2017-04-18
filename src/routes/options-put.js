@@ -6,10 +6,9 @@ module.exports = {
   method: 'PUT',
   path: '/api/v1/options',
   handler: (request, reply) => {
-    let options = request.payload.options;
-    console.log("options",options);
+    let options = JSON.parse(request.payload.options); //request.payload.options;
     Options.findOneAndUpdate({_id: options._id}, options, {upsert: true}, (err) => {
-
+      console.log(options);
       if (err) {
         console.log(err);
         reply("500 Error. Try Again.");
