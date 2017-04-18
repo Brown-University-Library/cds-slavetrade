@@ -61,6 +61,15 @@
       </article>
       <article class="row">
         <div class="form-group">
+          <h3>Racial Tag</h3>
+          <ul data-bind="foreach: racialTagOptions">
+            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'racialTag')" class="btn btn-danger">DELETE</button></span></div></li>
+          </ul>
+          <button data-bind="click: function() {addOption('racialTag')}" class="btn btn-default">Add Origin Option</button>
+        </div>
+      </article>
+      <article class="row">
+        <div class="form-group">
           <h3>Type/Kind of Enslavement</h3>
           <ul data-bind="foreach: mannerOfEnslavementOptions">
             <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>

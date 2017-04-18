@@ -44,8 +44,14 @@ const blank = {
     "givenName" : "",
     "familyName" : ""
   },
+  "dateOfRunaway": {
+    "year" : "",
+    "month" : "",
+    "day" : ""
+  },
   "sourceType": "",
   "recordType": "",
+  "citation": "",
   "additionalInfo": "",
   "researcherNotes": ""
 }

@@ -7,7 +7,8 @@ const OptionsSchema = new Schema({
     month: [String],
     tribe: [String],
     origin: [String],
-    mannerOfEnslavement: [String]
+    mannerOfEnslavement: [String],
+    racialTag: [String]
 });
 
 

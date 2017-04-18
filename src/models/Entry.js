@@ -33,6 +33,11 @@ const EntrySchema = new Schema({
     stringLocation: String,
     colonyState: String,
     nationalContext: String,
+    dateOfRunaway: {
+      year: String,
+      month: String,
+      day: String
+    },
     partner: {
       inDatabase : Boolean,
       givenName: String,
@@ -40,6 +45,7 @@ const EntrySchema = new Schema({
     },
     sourceType: String,
     recordType: String,
+    citation: String,
     additionalInfo: String,
     researcherNotes: String
 });

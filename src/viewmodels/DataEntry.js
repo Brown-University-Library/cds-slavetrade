@@ -42,6 +42,7 @@ let DataEntryViewModel = function() {
   self.tribeOptions = ko.observableArray();
   self.originOptions = ko.observableArray();
   self.mannerOfEnslavementOptions = ko.observableArray();
+  self.racialTagOptions = ko.observableArray();
   self.addOption = function(category) {
     console.log("hi");
     console.log(self, category, self[category + 'Options']);
@@ -55,7 +56,8 @@ let DataEntryViewModel = function() {
       month: ko.mapping.toJS(self.monthOptions),
       tribe: ko.mapping.toJS(self.tribeOptions),
       origin: ko.mapping.toJS(self.originOptions),
-      mannerOfEnslavement: ko.mapping.toJS(self.mannerOfEnslavementOptions)
+      mannerOfEnslavement: ko.mapping.toJS(self.mannerOfEnslavementOptions),
+      racialTag: ko.mapping.toJS(self.racialTagOptions)
     };
     console.log(payload, JSON.stringify(payload));
     $.ajax({
@@ -112,6 +114,9 @@ let DataEntryViewModel = function() {
       }
       for (let i = 0; i < options.mannerOfEnslavement.length; ++i) {
         self.mannerOfEnslavementOptions.push(ko.observable(options.mannerOfEnslavement[i]));
+      }
+      for (let i = 0; i < options.racialTag.length; ++i) {
+        self.racialTagOptions.push(ko.observable(options.racialTag[i]));
       }
     });
 
