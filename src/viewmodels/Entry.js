@@ -66,6 +66,10 @@ let EntryViewModel = function(data) {
     return self.indigenousName() || (self.baptismalName && (self.baptismalName.givenName() + " " + self.baptismalName.familyName())) || 'No Name';
   });
 
+  self.dateString = ko.computed(function() {
+    return self.date.day() + " " + self.date.month() + " " + self.date.year();
+  });
+
   self.save = function() {
     console.log(self.stringLocation);
     self.meta.lastModified(getCurrentDate());

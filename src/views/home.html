@@ -33,14 +33,20 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
+              <th>Date</th>
+              <th>Colony/State</th>
               <th>Last Modified</th>
               <th>Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Draft')">
             <tr data-bind="click: $parent.edit">
+              <td data-bind="text: _id"></td>
               <td data-bind="text: displayName"></td>
+              <td data-bind="text: dateString"></td>
+              <td data-bind="text: colonyState"></td>
               <td data-bind="text: meta.lastModified"></td>
               <td data-bind="text: meta.updatedBy"></td>
             </tr>
@@ -52,15 +58,21 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
+              <th>Date</th>
+              <th>Colony/State</th>
               <th>Last Modified</th>
               <th>Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Internal')">
             <tr data-bind="click: $parent.edit">
+              <td data-bind="text: _id"></td>
               <td data-bind="text: displayName"></td>
-              <td data-bind="text: meta.astModified"></td>
+              <td data-bind="text: dateString"></td>
+              <td data-bind="text: colonyState"></td>
+              <td data-bind="text: meta.lastModified"></td>
               <td data-bind="text: meta.updatedBy"></td>
             </tr>
           </tbody>
@@ -71,14 +83,20 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
+              <th>Date</th>
+              <th>Colony/State</th>
               <th>Last Modified</th>
               <th>Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Public')">
             <tr data-bind="click: $parent.edit">
+              <td data-bind="text: _id"></td>
               <td data-bind="text: displayName"></td>
+              <td data-bind="text: dateString"></td>
+              <td data-bind="text: colonyState"></td>
               <td data-bind="text: meta.lastModified"></td>
               <td data-bind="text: meta.updatedBy"></td>
             </tr>
@@ -118,7 +136,7 @@
         </section>
         <section id="baptismalName">
           <strong>Baptismal Name</strong><br>
-          <div style="padding-left:35px">
+          <div style="padding-left:35px; padding-top: 10px;">
             <div class="form-group">
               <label for="givenname">First Name:</label>
               <input data-bind="value: baptismalName.givenName" name="givenname" class="form-control" />
@@ -187,7 +205,7 @@
         </section>
         <section id="owner">
           <strong>Owner</strong><br>
-          <div style="padding-left: 35px">
+          <div style="padding-left: 35px; padding-top: 10px;">
             <div class="form-group">
               <label for="ownerTitle">Title:</label>
               <input data-bind="value: owner.title" name="ownerTitle" class="form-control" />
@@ -204,7 +222,7 @@
         </section>
         <section id="partner">
           <strong>Partner</strong><br>
-          <div style="padding-left: 35px">
+          <div style="padding-left: 35px; padding-top: 10px;">
             <div class="form-group">
               <label for="partnerInDatabase">In Database:</label>
               <input data-bind="value: partner.isDatabase" name="partnerInDatabase" class="form-control" />
@@ -219,8 +237,8 @@
             </div>
         </section>
         <section id="dateOfRunaway">
-          <strong>Date of Runaway</strong><br>
-          <div style="padding-left: 35px">
+          <strong>Date of Runaway</strong><br><br>
+          <div style="padding-left: 35px; padding-top: 10px;">
             <div class="form-group">
               <label for="yearRunaway">Year:</label>
               <input data-bind="value: dateOfRunaway.year" name="yearRunaway" class="form-control" />
