@@ -27,58 +27,83 @@
       <p>Lorem Ipsum Dolor</p>
     </section>
   </article>
-  <article id="adminPanel">
-    <div class="col-xs-3"></div>
-    <section id="dropdownOptions" class="col-xs-6">
-      <!-- TODO: I would love to make these templates or bindings -->
-      <h2>Drop Down Options</h2>
-      <article class="row">
-        <div class="form-group">
-          <h3>Sex</h3>
-          <ul data-bind="foreach: sexOptions">
-            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'sex')" class="btn btn-danger">DELETE</button></span></div></li>
-          </ul>
-          <button data-bind="click: function() {addOption('sex')}" class="btn btn-default">Add Sex Option</button>
-        </div>
-      </article>
-      <article class="row">
-        <div class="form-group">
-          <h3>Tribe</h3>
-          <ul data-bind="foreach: tribeOptions">
-            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'tribe')" class="btn btn-danger">DELETE</button></span></div></li>
-          </ul>
-          <button data-bind="click: function() {addOption('tribe')}" class="btn btn-default">Add Tribe Option</button>
-        </div>
-      </article>
-      <article class="row">
-        <div class="form-group">
-          <h3>Origin</h3>
-          <ul data-bind="foreach: originOptions">
-            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
-          </ul>
-          <button data-bind="click: function() {addOption('origin')}" class="btn btn-default">Add Origin Option</button>
-        </div>
-      </article>
-      <article class="row">
-        <div class="form-group">
-          <h3>Racial Tag</h3>
-          <ul data-bind="foreach: racialTagOptions">
-            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'racialTag')" class="btn btn-danger">DELETE</button></span></div></li>
-          </ul>
-          <button data-bind="click: function() {addOption('racialTag')}" class="btn btn-default">Add Origin Option</button>
-        </div>
-      </article>
-      <article class="row">
-        <div class="form-group">
-          <h3>Type/Kind of Enslavement</h3>
-          <ul data-bind="foreach: mannerOfEnslavementOptions">
-            <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
-          </ul>
-          <button data-bind="click: function() {addOption('mannerOfEnslavement')}" class="btn btn-default">Add Type/Kind of Enslavement Option</button>
-        </div>
-      </article>
-    </section>
-    <div class="col-xs-3"></div>
+  <article id="adminPanel" class="container">
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <section id="dropdownOptions" class="col-xs-6">
+        <!-- TODO: I would love to make these templates or bindings -->
+        <h2>Drop Down Options</h2>
+        <article class="row">
+          <div class="form-group">
+            <h3>Sex</h3>
+            <ul data-bind="foreach: sexOptions">
+              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'sex')" class="btn btn-danger">DELETE</button></span></div></li>
+            </ul>
+            <button data-bind="click: function() {addOption('sex')}" class="btn btn-default">Add Sex Option</button>
+          </div>
+        </article>
+        <article class="row">
+          <div class="form-group">
+            <h3>Tribe</h3>
+            <ul data-bind="foreach: tribeOptions">
+              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'tribe')" class="btn btn-danger">DELETE</button></span></div></li>
+            </ul>
+            <button data-bind="click: function() {addOption('tribe')}" class="btn btn-default">Add Tribe Option</button>
+          </div>
+        </article>
+        <article class="row">
+          <div class="form-group">
+            <h3>Origin</h3>
+            <ul data-bind="foreach: originOptions">
+              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
+            </ul>
+            <button data-bind="click: function() {addOption('origin')}" class="btn btn-default">Add Origin Option</button>
+          </div>
+        </article>
+        <article class="row">
+          <div class="form-group">
+            <h3>Racial Tag</h3>
+            <ul data-bind="foreach: racialTagOptions">
+              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'racialTag')" class="btn btn-danger">DELETE</button></span></div></li>
+            </ul>
+            <button data-bind="click: function() {addOption('racialTag')}" class="btn btn-default">Add Origin Option</button>
+          </div>
+        </article>
+        <article class="row">
+          <div class="form-group">
+            <h3>Type/Kind of Enslavement</h3>
+            <ul data-bind="foreach: mannerOfEnslavementOptions">
+              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
+            </ul>
+            <button data-bind="click: function() {addOption('mannerOfEnslavement')}" class="btn btn-default">Add Type/Kind of Enslavement Option</button>
+          </div>
+        </article>
+      </section>
+      <div class="col-xs-3"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <section id="users" class="col-xs-6">
+        <h2>New User</h2>
+        <article class="row">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input data-bind="value: username" name="username" class="form-control" />
+            <label for="givenName">Given Name:</label>
+            <input data-bind="value: givenName" name="givenName" class="form-control" />
+            <label for="familyName">Family Name:</label>
+            <input data-bind="value: familyName" name="familyName" class="form-control" />
+            <label for="pass">Password:</label>
+            <input data-bind="value: password" name="pass" class="form-control" />
+            <label for="role">Role: (put "Admin" without quotes)</label>
+            <input data-bind="value: role" name="role" class="form-control" />
+            <button data-bind="click: newUser" class="btn btn-primary">Add</button>
+          </div>
+        </article>
+      </section>
+      <div class="col-xs-3"></div>
+    </div>
   </article>
 
   <footer>

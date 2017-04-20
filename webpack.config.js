@@ -16,6 +16,9 @@ module.exports = {
       },
       {
         from: Path.resolve(__dirname, 'src/views/admin.html')
+      },
+      {
+        from: Path.resolve(__dirname, 'src/views/not-admin.html')
       }
     ])
   ],

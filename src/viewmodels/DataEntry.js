@@ -79,6 +79,37 @@ let DataEntryViewModel = function() {
     self.saveOptions();
   }
 
+  self.username = ko.observable();
+  self.givenName = ko.observable();
+  self.familyName = ko.observable();
+  self.password = ko.observable();
+  self.role = ko.observable();
+  self.newUser = function() {
+    let payload = {
+      username: ko.mapping.toJS(self.username),
+      password: ko.mapping.toJS(self.password),
+      givenName: ko.mapping.toJS(self.givenName),
+      familyName: ko.mapping.toJS(self.familyName),
+      role: ko.mapping.toJS(self.role)
+    };
+
+    console.log(payload, JSON.stringify(payload));
+    $.ajax({
+      url: "/api/v1/users",
+      method: "POST",
+      data: {user: JSON.stringify(payload)}
+    })
+    .done((data) => {
+      console.log(data);
+      self.username("");
+      self.givenName("");
+      self.familyName("");
+      self.password("");
+      self.role("");
+    });
+    console.log("save");
+  }
+
   // initializing data
   getEntries((entries) => {
     _.forEach(entries, (item) => {
