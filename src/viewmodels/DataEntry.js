@@ -30,6 +30,14 @@ let getOptions = function(callback) {
   });
 }
 
+let getUser = function(callback) {
+  $.get('/api/v1/users/me', (data) => {
+    console.log(data);
+    let user = JSON.parse(data);
+    callback(user);
+  });
+}
+
 let DataEntryViewModel = function() {
   let self = this;
 
@@ -158,7 +166,7 @@ let DataEntryViewModel = function() {
         "prevVersions": [], //objectIDs
         "updatedBy": "", //user
         "lastModified": "",
-        "usersWithAccess": [] //users (only used in Internal stage)
+        "usersWithAccess": [] //users (only used in Draft stage)
       },
       "date" : {
         "year" : "",
@@ -205,8 +213,13 @@ let DataEntryViewModel = function() {
     });
   }
 
-  // TODO: get from auth data
-  self.user = ko.observable(_.find(users, {_id: "123"}));
+  self.userGivenName = ko.observable();
+  self.userId = ko.observable();
+  getUser((user) => {
+    console.log("use", user.givenName);
+    self.userGivenName(user.givenName);
+    self.userId(user._id);
+  });
 
   self.edit = function(entry) {
     // entry argument is not observable
@@ -248,7 +261,7 @@ let DataEntryViewModel = function() {
       return item()._id() == entry._id();
     });
     // have the entry viewmodel deal with sending data to server
-    entryToSave().save();
+    entryToSave().save(self.userId(), self.userGivenName());
     // get rid of the edit form from view
     self.editEntry(null);
     // show the welcome message and tables again

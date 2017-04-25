@@ -67,12 +67,28 @@ let EntryViewModel = function(data) {
   });
 
   self.dateString = ko.computed(function() {
-    return self.date.day() + " " + self.date.month() + " " + self.date.year();
+    return self.date.year() + " " + self.date.month() + " " + self.date.day();
   });
 
-  self.save = function() {
-    console.log(self.stringLocation);
+  self.save = function(userId, userGivenName) {
     self.meta.lastModified(getCurrentDate());
+    console.log(userId, userGivenName);
+    self.meta.usersWithAccess([userId]);
+    self.meta.updatedBy(userGivenName);
+    $.ajax({
+      url: "/api/v1/entries",
+      method: "PUT",
+      data: {entry: ko.mapping.toJSON(self)}
+    })
+    .done((data) => {
+      console.log(data);
+    });
+    console.log("save");
+  }
+
+  self.changeStage = function(newStage) {
+    console.log(newStage);
+    self.meta.stage(newStage);
     $.ajax({
       url: "/api/v1/entries",
       method: "PUT",

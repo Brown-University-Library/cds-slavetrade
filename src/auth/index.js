@@ -7,7 +7,7 @@ module.exports = {
 
     User.findOne({ "username": username }, (err, user) => {
 
-      if (err) {
+      if (err || user == null) {
         callback(null, false);
         return;
       }

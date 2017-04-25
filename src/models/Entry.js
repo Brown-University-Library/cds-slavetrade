@@ -8,7 +8,7 @@ const EntrySchema = new Schema({
       prevVersions: String, //[Schema.Types.ObjectId],
       updatedBy: String, //Schema.Types.ObjectId,
       lastModified: String,
-      usersWithAccess: String //[Schema.Types.ObjectId]
+      usersWithAccess: [String]
     },
     date: {
       year: String,
