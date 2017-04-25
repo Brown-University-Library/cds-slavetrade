@@ -1,5 +1,30 @@
 const Entry = require('../models/Entry.js');
+const Counter = require('../models/Counters.js');
 const db = require('../database');
+
+function getNextSequence(name, callback) {
+  Counter.findOneAndUpdate(
+    {
+    _id: name
+    },
+    {
+      $inc: { seq: 1 }
+    },
+    {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: true
+    },
+    (err, ret) => {
+      if (err) {
+        console.log("err", err);
+        return;
+      }
+      console.log("ret", ret);
+      callback(ret);
+    }
+   )
+}
 
 module.exports = {
   method: 'PUT',
@@ -12,28 +37,28 @@ module.exports = {
 
     let entryToSave = new Entry(entryToSaveJS);
 
-    // let index = _.findIndex(_entries, (item) => {
-    //   console.log(item._id);
-    //   return item._id == entryToSave._id;
-    // });
+    getNextSequence("identifier", function(counter) {
+      console.log(counter);
+      entryToSave.meta.identifier = counter.seq;
+      Entry.findOneAndUpdate({_id: entryToSave._id}, entryToSave, {upsert: true, new: true}, (err, entry) => {
+        console.log(entry);
+        if (err) {
+          console.log(err);
+          reply("500 Error. Try Again.");
+          return;
+        }
 
-    // console.log(index);
-    //
-    // _entries[index] = entryToSave;
+        let response = {
+          success: true,
+          data: entry
+        }
 
-    Entry.findOneAndUpdate({_id: entryToSave._id}, entryToSave, {upsert: true}, (err, entry) => {
-      if (err) {
-        console.log(err);
-        reply("500 Error. Try Again.");
-        return;
-      }
-
-      let response = {
-        success: true
-      }
-
-      reply(JSON.stringify(response));
+        reply(JSON.stringify(response));
+      });
     });
+
+
+
 
     // if (request.payload.isNew) {
     //   entryToSave.save((err, entry) => {

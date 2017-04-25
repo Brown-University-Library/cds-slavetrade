@@ -10,11 +10,13 @@ let getCurrentDate = function() {
 const blank = {
   "_id" : "",
   "meta" : {
+    "category": "0",
+    "identifier": 0,
     "stage": "", // Public, Internal, Draft
     "prevVersions": [], //objectIDs
     "updatedBy": "", //user
     "lastModified": "",
-    "usersWithAccess": [] //users (only used in Internal stage)
+    "usersWithAccess": [] //users (only used in Draft stage)
   },
   "date" : {
     "year" : "",
@@ -44,14 +46,8 @@ const blank = {
     "givenName" : "",
     "familyName" : ""
   },
-  "dateOfRunaway": {
-    "year" : "",
-    "month" : "",
-    "day" : ""
-  },
   "sourceType": "",
   "recordType": "",
-  "citation": "",
   "additionalInfo": "",
   "researcherNotes": ""
 }
@@ -61,6 +57,18 @@ let EntryViewModel = function(data) {
 
   self = ko.mapping.fromJS(blank, {});
   ko.mapping.fromJS(data, {}, self);
+
+  self.displayId = ko.computed(function() {
+    return 'DISA-' + self.meta.category() + '-' + self.meta.identifier();
+  });
+
+  self.displayFirstName = ko.computed(function() {
+    return self.indigenousName() || (self.baptismalName && self.baptismalName.givenName()) || '';
+  });
+
+  self.displayLastName = ko.computed(function() {
+    return (self.baptismalName && self.baptismalName.familyName()) || '';
+  });
 
   self.displayName = ko.computed(function() {
     return self.indigenousName() || (self.baptismalName && (self.baptismalName.givenName() + " " + self.baptismalName.familyName())) || 'No Name';
@@ -75,12 +83,17 @@ let EntryViewModel = function(data) {
     console.log(userId, userGivenName);
     self.meta.usersWithAccess([userId]);
     self.meta.updatedBy(userGivenName);
+    // TODO: change to user input
+    self.meta.category("15");
     $.ajax({
       url: "/api/v1/entries",
       method: "PUT",
       data: {entry: ko.mapping.toJSON(self)}
     })
     .done((data) => {
+      data = JSON.parse(data);
+      console.log(data);
+      self.meta.identifier(data.data.meta.identifier);
       console.log(data);
     });
     console.log("save");

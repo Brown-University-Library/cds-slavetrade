@@ -162,6 +162,8 @@ let DataEntryViewModel = function() {
     self.blank = new Entry({
       "_id" : "",
       "meta" : {
+        "category": "0",
+        "identifier": 0,
         "stage": "", // Public, Internal, Draft
         "prevVersions": [], //objectIDs
         "updatedBy": "", //user

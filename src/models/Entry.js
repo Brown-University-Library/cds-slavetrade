@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const EntrySchema = new Schema({
     _id: String,
     meta: {
+      category: String,
+      identifier: Number,
       stage: String,
       prevVersions: String, //[Schema.Types.ObjectId],
       updatedBy: String, //Schema.Types.ObjectId,
