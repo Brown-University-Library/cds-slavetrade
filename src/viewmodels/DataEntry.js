@@ -225,6 +225,28 @@ let DataEntryViewModel = function() {
     self.userId(user._id);
   });
 
+
+  let sort = false;
+  self.sort = function(...sortFields) {
+    console.log("sorting");
+    let inverse = 1;
+    if (sort) inverse = -inverse;
+    console.log(inverse);
+    console.log(sortFields);
+    self.entries.sort((l, r) => {
+      // this syntax is ugly, but it works
+      let left = l(), right = r();
+      for (let i = 0; i < sortFields.length; ++i) {
+        left = left[sortFields[i]];
+        right = right[sortFields[i]];
+      }
+      console.log(inverse);
+      return left() == right() ? 0 : left() > right() ? inverse : -inverse;
+      //return l()[sortField]() > r()[sortField]() ? inverse * 1 : inverse * -1;
+    });
+    sort = !sort;
+  }
+
   self.edit = function(entry) {
     // entry argument is not observable
 
