@@ -48,6 +48,7 @@ const blank = {
   },
   "sourceType": "",
   "recordType": "",
+  "citation": "",
   "additionalInfo": "",
   "researcherNotes": ""
 }
@@ -94,6 +95,20 @@ let EntryViewModel = function(data) {
       data = JSON.parse(data);
       console.log(data);
       self.meta.identifier(data.data.meta.identifier);
+      console.log(data);
+    });
+    console.log("save");
+  }
+
+  self.delete = function(deleteStage) {
+    self.meta.stage(deleteStage);
+    $.ajax({
+      url: "/api/v1/entries",
+      method: "PUT",
+      data: {entry: ko.mapping.toJSON(self)}
+    })
+    .done((data) => {
+      data = JSON.parse(data);
       console.log(data);
     });
     console.log("save");

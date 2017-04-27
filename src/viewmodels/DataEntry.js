@@ -6,7 +6,8 @@ const base32 = require('base32');
 
 const DRAFT = "Draft",
       INTERNAL = "Internal",
-      PUBLIC = "Public";
+      PUBLIC = "Public",
+      DELETED = "Deleted";
 
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
@@ -200,6 +201,7 @@ let DataEntryViewModel = function() {
       },
       "sourceType": "",
       "recordType": "",
+      "citation": "",
       "additionalInfo": "",
       "researcherNotes": ""
     });
@@ -268,6 +270,24 @@ let DataEntryViewModel = function() {
     self.editEntry(null);
     // show the welcome message and tables again
     self.showHome(true);
+  }
+
+  self.delete = function(entry) {
+    let confirm = prompt("Are you sure you want to delete this entry?\nIf so, type 'DELETE' and then click 'OK'","");
+    if (confirm == 'DELETE') {
+      // find the entry that was edited
+      let entryToDelete = ko.utils.arrayFirst(self.entries(), (item) => {
+        return item()._id() == entry._id();
+      });
+      // have the entry viewmodel deal with sending data to server
+      entryToDelete().delete(DELETED);
+      // remove from array
+      ko.utils.arrayRemoveItem(self.entries, entryToDelete);
+      // get rid of the edit form from view
+      self.editEntry(null);
+      // show the welcome message and tables again
+      self.showHome(true);
+    }
   }
 
   // hack-y function
