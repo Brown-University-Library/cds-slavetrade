@@ -7,67 +7,44 @@ let getCurrentDate = function() {
   return date.toLocaleString("en-us");
 }
 
-const blank = {
-  "_id" : "",
-  "meta" : {
-    "category": "0",
-    "identifier": 0,
-    "stage": "", // Public, Internal, Draft
-    "prevVersions": [], //objectIDs
-    "updatedBy": "", //user
-    "lastModified": "",
-    "usersWithAccess": [] //users (only used in Draft stage)
-  },
-  "date" : {
-    "year" : "",
-    "month" : "",
-    "day" : ""
-  },
-  "indigenousName" : "",
-  "baptismalName" : {
-    "givenName" : "",
-    "familyName" : ""
-  },
-  "tribe" : "",
-  "origin" : "",
-  "sex" : "",
-  "age" : "",
-  "mannerOfEnslavement" : "",
-  "owner" : {
-    "title" : "",
-    "givenName" : "",
-    "familyName" : ""
-  },
-  "stringLocation": "",
-  "colonyState": "",
-  "nationalContext": "",
-  "partner" : {
-    "inDatabase" : false,
-    "givenName" : "",
-    "familyName" : ""
-  },
-  "sourceType": "",
-  "recordType": "",
-  "additionalInfo": "",
-  "researcherNotes": ""
-}
+const blank = require('../BlankEntry.js');
 
 let EntryViewModel = function(data) {
   let self = this;
 
   self = ko.mapping.fromJS(blank, {});
   ko.mapping.fromJS(data, {}, self);
+  if (self.names.index == -1) {
+    let name = {
+      firstName: ko.observable(""),
+      lastName: ko.observable("")
+    }
+    let names = {
+      values: ko.observableArray([]),
+      index: 0
+    };
+    names.values([name]);
+    self.names = names;
+  }
 
   self.displayId = ko.computed(function() {
     return 'DISA-' + self.meta.category() + '-' + self.meta.identifier();
   });
 
   self.displayFirstName = ko.computed(function() {
-    return self.indigenousName() || (self.baptismalName && self.baptismalName.givenName()) || '';
+    if (self.names.index() != -1) {
+      return (self.names && self.names.values && self.names.index && self.names.values()[self.names.index()] && self.names.values()[self.names.index()].firstName()) || 'No Name';
+    } else {
+      return 'No Name';
+    }
   });
 
   self.displayLastName = ko.computed(function() {
-    return (self.baptismalName && self.baptismalName.familyName()) || '';
+    if (self.names.index() != -1) {
+      return (self.names && self.names.values && self.names.index && self.names.values()[self.names.index()] && self.names.values()[self.names.index()].lastName()) || 'No Name';
+    } else {
+      return 'No Name';
+    }
   });
 
   self.displayName = ko.computed(function() {
@@ -75,12 +52,33 @@ let EntryViewModel = function(data) {
   });
 
   self.dateString = ko.computed(function() {
-    return self.date.year() + " " + self.date.month() + " " + self.date.day();
+    return (self.date.year && self.date.year()) + " " + (self.date.month && self.date.month()) + " " + (self.date.day && self.date.day());
   });
+
+  self.addName = function() {
+    self.names.values.push({firstName:ko.observable(""),lastName:ko.observable("")});
+  }
+
+  self.deleteName = function(name) {
+    let length = self.names.values().length;
+    if (length > 1) {
+      self.names.values.remove(name);
+      length = self.names.values().length;
+      if (self.names.index() >= length) {
+        self.names.index(length - 1);
+      }
+    } else {
+      alert("Cannot have 0 names");
+    }
+  }
+
+  self.makePrimaryName = function(name) {
+    console.log(self.names.values.indexOf(name));
+    self.names.index(self.names.values.indexOf(name));
+  }
 
   self.save = function(userId, userGivenName) {
     self.meta.lastModified(getCurrentDate());
-    console.log(userId, userGivenName);
     self.meta.usersWithAccess([userId]);
     self.meta.updatedBy(userGivenName);
     // TODO: change to user input
@@ -94,6 +92,20 @@ let EntryViewModel = function(data) {
       data = JSON.parse(data);
       console.log(data);
       self.meta.identifier(data.data.meta.identifier);
+      console.log(data);
+    });
+    console.log("save");
+  }
+
+  self.delete = function(deleteStage) {
+    self.meta.stage(deleteStage);
+    $.ajax({
+      url: "/api/v1/entries",
+      method: "PUT",
+      data: {entry: ko.mapping.toJSON(self)}
+    })
+    .done((data) => {
+      data = JSON.parse(data);
       console.log(data);
     });
     console.log("save");

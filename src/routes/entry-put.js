@@ -2,7 +2,11 @@ const Entry = require('../models/Entry.js');
 const Counter = require('../models/Counters.js');
 const db = require('../database');
 
-function getNextSequence(name, callback) {
+function getNextSequence(name, alreadyPresent, callback) {
+  if (alreadyPresent) {
+    callback();
+    return;
+  }
   Counter.findOneAndUpdate(
     {
     _id: name
@@ -37,9 +41,10 @@ module.exports = {
 
     let entryToSave = new Entry(entryToSaveJS);
 
-    getNextSequence("identifier", function(counter) {
+    getNextSequence("identifier", entryToSave.meta.identifier, function(counter) {
       console.log(counter);
-      entryToSave.meta.identifier = counter.seq;
+      if (counter) entryToSave.meta.identifier = counter.seq;
+      console.log(entryToSave.names.values);
       Entry.findOneAndUpdate({_id: entryToSave._id}, entryToSave, {upsert: true, new: true}, (err, entry) => {
         console.log(entry);
         if (err) {

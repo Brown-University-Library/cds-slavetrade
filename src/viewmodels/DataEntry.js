@@ -6,15 +6,19 @@ const base32 = require('base32');
 
 const DRAFT = "Draft",
       INTERNAL = "Internal",
-      PUBLIC = "Public";
+      PUBLIC = "Public",
+      DELETED = "Deleted";
 
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
   // this should probably be changed, maybe use bower?
 
   $.get('/api/v1/entries', (data) => {
-    console.log(data);
+    //console.log(data);
     let entries = JSON.parse(data);
+    for (var i = 0; i < entries.length; ++i) {
+      console.log(entries[i].baptismalName.givenName);
+    }
     callback(entries);
   });
 }
@@ -159,50 +163,7 @@ let DataEntryViewModel = function() {
       }
     });
 
-    self.blank = new Entry({
-      "_id" : "",
-      "meta" : {
-        "category": "0",
-        "identifier": 0,
-        "stage": "", // Public, Internal, Draft
-        "prevVersions": [], //objectIDs
-        "updatedBy": "", //user
-        "lastModified": "",
-        "usersWithAccess": [] //users (only used in Draft stage)
-      },
-      "date" : {
-        "year" : "",
-        "month" : "",
-        "day" : ""
-      },
-      "indigenousName" : "",
-      "baptismalName" : {
-        "givenName" : "",
-        "familyName" : ""
-      },
-      "tribe" : "",
-      "origin" : "",
-      "sex" : "",
-      "age" : "",
-      "mannerOfEnslavement" : "",
-      "owner" : {
-        "title" : "",
-        "givenName" : "",
-        "familyName" : ""
-      },
-      "stringLocation": "",
-      "colonyState": "",
-      "nationalContext": "",
-      "partner" : {
-        "inDatabase" : false,
-        "givenName" : "",
-        "familyName" : ""
-      },
-      "sourceType": "",
-      "recordType": "",
-      "additionalInfo": "",
-      "researcherNotes": ""
-    });
+    self.blank = new Entry(require('../BlankEntry.js'));
   });
 
   self.showHome = ko.observable(true);
@@ -222,6 +183,57 @@ let DataEntryViewModel = function() {
     self.userGivenName(user.givenName);
     self.userId(user._id);
   });
+
+
+  let sort = false;
+  self.sort = function(...sortFields) {
+    console.log("sorting");
+    let inverse = 1;
+    if (sort) inverse = -inverse;
+    self.entries.sort((l, r) => {
+      // this syntax is ugly, but it works
+      let left = l(), right = r();
+      for (let i = 0; i < sortFields.length; ++i) {
+        left = left[sortFields[i]];
+        right = right[sortFields[i]];
+      }
+      let s1 = left(),
+          s2 = right();
+      if (s1 === s2) {
+        return 0;
+      } else if (s1 < s2) {
+        return -inverse;
+      } else {
+        return inverse;
+      }
+
+      //return l()[sortField]() > r()[sortField]() ? inverse * 1 : inverse * -1;
+    });
+    sort = !sort;
+  }
+
+  self.sortName = function(sortField) {
+    console.log("sorting");
+    let inverse = 1;
+    if (sort) inverse = -inverse;
+    self.entries.sort((l, r) => {
+      // this syntax is ugly, but it works
+      let left = l(), right = r();
+      console.log(left.meta.identifier(), left.names.index(),left.names.values()[left.names.index()]);
+      left = left.names.values()[left.names.index()][sortField];
+      right = right.names.values()[right.names.index()][sortField];
+      let s1 = left(),
+          s2 = right();
+      if (s1 === s2) {
+        return 0;
+      } else if (s1 < s2) {
+        return -inverse;
+      } else {
+        return inverse;
+      }
+    });
+    sort = !sort;
+  }
 
   self.edit = function(entry) {
     // entry argument is not observable
@@ -268,6 +280,24 @@ let DataEntryViewModel = function() {
     self.editEntry(null);
     // show the welcome message and tables again
     self.showHome(true);
+  }
+
+  self.delete = function(entry) {
+    let confirm = prompt("Are you sure you want to delete this entry?\nIf so, type 'DELETE' and then click 'OK'","");
+    if (confirm == 'DELETE') {
+      // find the entry that was edited
+      let entryToDelete = ko.utils.arrayFirst(self.entries(), (item) => {
+        return item()._id() == entry._id();
+      });
+      // have the entry viewmodel deal with sending data to server
+      entryToDelete().delete(DELETED);
+      // remove from array
+      ko.utils.arrayRemoveItem(self.entries, entryToDelete);
+      // get rid of the edit form from view
+      self.editEntry(null);
+      // show the welcome message and tables again
+      self.showHome(true);
+    }
   }
 
   // hack-y function
