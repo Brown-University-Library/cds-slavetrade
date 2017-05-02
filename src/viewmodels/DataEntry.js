@@ -219,6 +219,7 @@ let DataEntryViewModel = function() {
     self.entries.sort((l, r) => {
       // this syntax is ugly, but it works
       let left = l(), right = r();
+      console.log(left.meta.identifier(), left.names.index(),left.names.values()[left.names.index()]);
       left = left.names.values()[left.names.index()][sortField];
       right = right.names.values()[right.names.index()][sortField];
       let s1 = left(),

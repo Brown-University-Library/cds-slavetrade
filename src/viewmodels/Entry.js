@@ -60,7 +60,16 @@ let EntryViewModel = function(data) {
   }
 
   self.deleteName = function(name) {
-    self.names.values.remove(name);
+    let length = self.names.values().length;
+    if (length > 1) {
+      self.names.values.remove(name);
+      length = self.names.values().length;
+      if (self.names.index() >= length) {
+        self.names.index(length - 1);
+      }
+    } else {
+      alert("Cannot have 0 names");
+    }
   }
 
   self.makePrimaryName = function(name) {
