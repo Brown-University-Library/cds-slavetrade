@@ -17,10 +17,14 @@ const EntrySchema = new Schema({
       month: String,
       day: String
     },
-    indigenousName: String,
-    baptismalName: {
-      givenName: String,
-      familyName: String
+    names: {
+      values: [
+        {
+          firstName: String,
+          lastName: String
+        }
+      ],
+      index: Number
     },
     tribe: String,
     origin: String,
