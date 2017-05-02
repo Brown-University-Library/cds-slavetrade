@@ -44,6 +44,7 @@ module.exports = {
     getNextSequence("identifier", entryToSave.meta.identifier, function(counter) {
       console.log(counter);
       if (counter) entryToSave.meta.identifier = counter.seq;
+      console.log(entryToSave.names.values);
       Entry.findOneAndUpdate({_id: entryToSave._id}, entryToSave, {upsert: true, new: true}, (err, entry) => {
         console.log(entry);
         if (err) {

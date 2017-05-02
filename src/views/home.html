@@ -24,7 +24,6 @@
   <article data-bind="visible: showHome" class="container">
     <section id="user">
       <h1>Hello <span data-bind="text: userGivenName"></span></h1>
-      <p>Lorem Ipsum Dolor</p>
       <button data-bind="click: newEntry" class="btn btn-primary">New Entry</button>
     </section>
     <section id="tables" class="row">
@@ -33,13 +32,13 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date</th>
-              <th>Colony/State</th>
-              <th>Last Modified</th>
-              <th>Updated By</th>
+              <th data-bind="click: (function(){sort('displayId')})">ID</th>
+              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
+              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
+              <th data-bind="click: (function(){sort('dateString')})">Date</th>
+              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
+              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
+              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Draft')">
@@ -60,13 +59,13 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date</th>
-              <th>Colony/State</th>
-              <th>Last Modified</th>
-              <th>Updated By</th>
+              <th data-bind="click: (function(){sort('displayId')})">ID</th>
+              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
+              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
+              <th data-bind="click: (function(){sort('dateString')})">Date</th>
+              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
+              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
+              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Internal')">
@@ -87,13 +86,13 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date</th>
-              <th>Colony/State</th>
-              <th>Last Modified</th>
-              <th>Updated By</th>
+              <th data-bind="click: (function(){sort('displayId')})">ID</th>
+              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
+              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
+              <th data-bind="click: (function(){sort('dateString')})">Date</th>
+              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
+              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
+              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: getEntries('Public')">
@@ -134,24 +133,30 @@
             <input data-bind="value: date.day" name="day" class="form-control" />
           </div>
         </section>
-        <section id="indigenousName">
-          <div class="form-group">
-            <label for="iname">Indigenous Name:</label>
-            <input data-bind="value: indigenousName" name="iname" class="form-control" />
-          </div>
-        </section>
-        <section id="baptismalName">
-          <strong>Baptismal Name</strong><br>
-          <div style="padding-left:35px; padding-top: 10px;">
+        <section id="names">
+          <article data-bind="foreach: {data: names.values, as: 'name'}">
+            <!-- ko if: $index() === $parent.names.index() -->
             <div class="form-group">
-              <label for="givenname">First Name:</label>
-              <input data-bind="value: baptismalName.givenName" name="givenname" class="form-control" />
+              <label for="firstName">Primary First Name:</label>
+              <input data-bind="value: name.firstName" name="firstName" class="form-control" />
+              <label for="lastName">Primary Last Name:</label>
+              <input data-bind="value: name.lastName" name="lastName" class="form-control" />
+              <button data-bind="click: $parent.makePrimaryName" class="btn btn-default">Make Primary</button>
+              <button data-bind="click: $parent.deleteName" class="btn btn-danger">Delete Name</button>
             </div>
+            <!-- /ko -->
+            <!-- ko if: $index() !== $parent.names.index() -->
             <div class="form-group">
-              <label for="familyname">Last Name:</label>
-              <input data-bind="value: baptismalName.familyName" name="familyname" class="form-control" />
+              <label for="firstName">First Name:</label>
+              <input data-bind="value: name.firstName" name="firstName" class="form-control" />
+              <label for="lastName">Last Name:</label>
+              <input data-bind="value: name.lastName" name="lastName" class="form-control" />
+              <button data-bind="click: $parent.makePrimaryName" class="btn btn-default">Make Primary</button>
+              <button data-bind="click: $parent.deleteName" class="btn btn-danger">Delete Name</button>
             </div>
-          </div>
+            <!-- /ko -->
+          </article>
+          <button data-bind="click: addName" class="btn btn-primary">Add Name</button>
         </section>
         <section id="tribe">
           <div class="form-group">
