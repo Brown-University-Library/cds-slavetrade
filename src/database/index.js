@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://st:st@ds049624.mlab.com:49624/coledev');
+const mongo_url = require('../config/database.config.js').mongo_url;
+
+mongoose.connect(mongo_url);
 const db = mongoose.connection;
 
 db.once('open', function() {

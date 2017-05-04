@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import {_entries, users} from '../Data.js'
 import Entry from '../viewmodels/Entry.js';
 const uuidV4 = require('uuid/v4');
 const base32 = require('base32');
