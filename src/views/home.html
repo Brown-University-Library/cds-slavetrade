@@ -24,7 +24,7 @@
   <article data-bind="visible: showHome" class="container">
     <section id="user">
       <h1>Hello <span data-bind="text: userGivenName"></span></h1>
-      <button data-bind="click: newEntry" class="btn btn-primary">New Entry</button>
+      <button data-bind="click: $root.newEntry" class="btn btn-primary">New Entry</button>
     </section>
     <section id="tables" class="row">
       <article id="drafts" class="col-xs-12">

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Entry from '../viewmodels/Entry.js';
+const blank = require('../BlankEntry.js');
 const uuidV4 = require('uuid/v4');
 const base32 = require('base32');
 
@@ -55,8 +56,6 @@ let DataEntryViewModel = function() {
   self.mannerOfEnslavementOptions = ko.observableArray();
   self.racialTagOptions = ko.observableArray();
   self.addOption = function(category) {
-    console.log("hi");
-    console.log(self, category, self[category + 'Options']);
     let listToAdd = self[category + 'Options'];
     listToAdd.push(ko.observable());
   }
@@ -70,7 +69,6 @@ let DataEntryViewModel = function() {
       mannerOfEnslavement: ko.mapping.toJS(self.mannerOfEnslavementOptions),
       racialTag: ko.mapping.toJS(self.racialTagOptions)
     };
-    console.log(payload, JSON.stringify(payload));
     $.ajax({
       url: "/api/v1/options",
       method: "PUT",
@@ -104,7 +102,6 @@ let DataEntryViewModel = function() {
       role: ko.mapping.toJS(self.role)
     };
 
-    console.log(payload, JSON.stringify(payload));
     $.ajax({
       url: "/api/v1/users",
       method: "POST",
@@ -161,9 +158,9 @@ let DataEntryViewModel = function() {
         self.racialTagOptions.push(ko.observable(options.racialTag[i]));
       }
     });
-
-    self.blank = new Entry(require('../BlankEntry.js'));
   });
+
+  self.blank = new Entry(blank);
 
   self.showHome = ko.observable(true);
   self.editEntry = ko.observable(null);
@@ -316,8 +313,8 @@ let DataEntryViewModel = function() {
   self.newEntry = function() {
     // little hack to get all the properties attached to the viewmodels
     // without needing to predefine all of them in a model.js file
-    console.log(self, self.entries());
     // need edge case for empty entries
+    
     let entryJS = ko.mapping.toJS(self.blank); //(self.entries() && self.entries()[0]));
     let entry = ko.observable(new Entry(entryJS));
 
