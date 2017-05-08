@@ -21,7 +21,7 @@ module.exports = {
         "lastName": ""
      }
     ],
-    "index": -1
+    "index": 0
   },
   "tribe" : "",
   "origin" : "",

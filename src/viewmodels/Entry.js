@@ -1,5 +1,4 @@
 import template from '../views/entry.html';
-import Data from '../Data.js';
 import _ from 'lodash';
 
 let getCurrentDate = function() {
@@ -8,6 +7,7 @@ let getCurrentDate = function() {
 }
 
 const blank = require('../BlankEntry.js');
+console.log("BLANK3", blank);
 
 let EntryViewModel = function(data) {
   let self = this;
@@ -47,9 +47,9 @@ let EntryViewModel = function(data) {
     }
   });
 
-  self.displayName = ko.computed(function() {
-    return self.indigenousName() || (self.baptismalName && (self.baptismalName.givenName() + " " + self.baptismalName.familyName())) || 'No Name';
-  });
+  // self.displayName = ko.computed(function() {
+  //   return self.indigenousName() || (self.baptismalName && (self.baptismalName.givenName() + " " + self.baptismalName.familyName())) || 'No Name';
+  // });
 
   self.dateString = ko.computed(function() {
     return (self.date.year && self.date.year()) + " " + (self.date.month && self.date.month()) + " " + (self.date.day && self.date.day());
