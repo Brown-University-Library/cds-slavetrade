@@ -1,8 +1,6 @@
-FROM node:latest
+FROM node:7.10
 
 WORKDIR /workspace
-
-RUN ["yarn", "global", "add", "bcrypt"]
 
 ADD package.json .
 
