@@ -2,4 +2,6 @@ FROM kkarczmarczyk/node-yarn
 
 ADD . .
 
-CMD ["sh", "-c", "yarn install; yarn run bower; yarn run server-dev"]
+RUN ["sh", "-c", "yarn install; yarn run bower"]
+
+CMD ["sh", "-c", "yarn run server-dev"]
