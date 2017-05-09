@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:7.10
 
 WORKDIR /workspace
 
@@ -8,6 +8,6 @@ RUN ["yarn", "install"]
 
 ADD . .
 
-RUN ["yarn", "run bower"]
+RUN ["yarn", "run", "bower"]
 
 CMD ["sh", "-c", "yarn run server-dev"]
