@@ -1,6 +1,6 @@
 const User = require('../models/User.js');
 const db = require('../database');
-const Bcrypt = require('bcrypt');
+const Bcrypt = require('bcryptjs');
 
 const saltRounds = 10;
 
