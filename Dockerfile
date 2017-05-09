@@ -1,7 +1,15 @@
-FROM kkarczmarczyk/node-yarn
+FROM node:latest
+
+WORKDIR /workspace
+
+RUN ["yarn", "global", "add", "bcrypt"]
+
+ADD package.json .
+
+RUN ["yarn", "install"]
 
 ADD . .
 
-RUN ["sh", "-c", "yarn install; yarn run bower"]
+RUN ["yarn", "run", "bower"]
 
 CMD ["sh", "-c", "yarn run server-dev"]
