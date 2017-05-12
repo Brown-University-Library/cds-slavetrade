@@ -134,7 +134,7 @@
           </div>
         </section>
         <section id="names">
-          <article data-bind="foreach: {data: names.values, as: 'name'}">
+          <article data-bind="foreach: {data: names.values(), as: 'name'}">
             <!-- ko if: $index() === $parent.names.index() -->
             <div class="form-group">
               <label for="firstName">Primary First Name:</label>
