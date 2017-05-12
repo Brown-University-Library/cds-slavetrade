@@ -14,25 +14,13 @@ let EntryViewModel = function(data) {
 
   self = ko.mapping.fromJS(blank, {});
   ko.mapping.fromJS(data, {}, self);
-  if (self.names.index == -1) {
-    let name = {
-      firstName: ko.observable(""),
-      lastName: ko.observable("")
-    }
-    let names = {
-      values: ko.observableArray([]),
-      index: 0
-    };
-    names.values([name]);
-    self.names = names;
-  }
 
   self.displayId = ko.computed(function() {
     return 'DISA-' + self.meta.category() + '-' + self.meta.identifier();
   });
 
   self.displayFirstName = ko.computed(function() {
-    if (self.names.index() != -1) {
+    if (self.names.index && self.names.index() != -1) {
       return (self.names && self.names.values && self.names.index && self.names.values()[self.names.index()] && self.names.values()[self.names.index()].firstName()) || 'No Name';
     } else {
       return 'No Name';
@@ -40,7 +28,7 @@ let EntryViewModel = function(data) {
   });
 
   self.displayLastName = ko.computed(function() {
-    if (self.names.index() != -1) {
+    if (self.names.index && self.names.index() != -1) {
       return (self.names && self.names.values && self.names.index && self.names.values()[self.names.index()] && self.names.values()[self.names.index()].lastName()) || 'No Name';
     } else {
       return 'No Name';
@@ -56,6 +44,7 @@ let EntryViewModel = function(data) {
   });
 
   self.addName = function() {
+    console.log(self.names, self.names.values());
     self.names.values.push({firstName:ko.observable(""),lastName:ko.observable("")});
   }
 
@@ -73,7 +62,6 @@ let EntryViewModel = function(data) {
   }
 
   self.makePrimaryName = function(name) {
-    console.log(self.names.values.indexOf(name));
     self.names.index(self.names.values.indexOf(name));
   }
 
@@ -89,12 +77,11 @@ let EntryViewModel = function(data) {
       data: {entry: ko.mapping.toJSON(self)}
     })
     .done((data) => {
+      //console.log(data);
       data = JSON.parse(data);
-      console.log(data);
       self.meta.identifier(data.data.meta.identifier);
-      console.log(data);
     });
-    console.log("save");
+    //console.log("save");
   }
 
   self.delete = function(deleteStage) {
@@ -105,14 +92,14 @@ let EntryViewModel = function(data) {
       data: {entry: ko.mapping.toJSON(self)}
     })
     .done((data) => {
+      //console.log(data);
       data = JSON.parse(data);
-      console.log(data);
     });
-    console.log("save");
+    //console.log("save");
   }
 
   self.changeStage = function(newStage) {
-    console.log(newStage);
+    //console.log(newStage);
     self.meta.stage(newStage);
     $.ajax({
       url: "/api/v1/entries",
@@ -120,9 +107,9 @@ let EntryViewModel = function(data) {
       data: {entry: ko.mapping.toJSON(self)}
     })
     .done((data) => {
-      console.log(data);
+      //console.log(data);
     });
-    console.log("save");
+    //console.log("save");
   }
 
   return self;

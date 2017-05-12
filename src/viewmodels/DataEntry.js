@@ -16,9 +16,6 @@ let getEntries = function(callback) {
   $.get('/api/v1/entries', (data) => {
     //console.log(data);
     let entries = JSON.parse(data);
-    for (var i = 0; i < entries.length; ++i) {
-      console.log(entries[i].baptismalName.givenName);
-    }
     callback(entries);
   });
 }
@@ -28,7 +25,7 @@ let getOptions = function(callback) {
   // this should probably be changed, maybe use bower?
 
   $.get('/api/v1/options', (data) => {
-    console.log(data);
+    //console.log(data);
     let options = JSON.parse(data);
     callback(options);
   });
@@ -36,7 +33,7 @@ let getOptions = function(callback) {
 
 let getUser = function(callback) {
   $.get('/api/v1/users/me', (data) => {
-    console.log(data);
+    //console.log(data);
     let user = JSON.parse(data);
     callback(user);
   });
@@ -75,9 +72,9 @@ let DataEntryViewModel = function() {
       data: {options: JSON.stringify(payload)}
     })
     .done((data) => {
-      console.log(data);
+      //console.log(data);
     });
-    console.log("save");
+    //console.log("save");
   }
 
   self.deleteOption = function(category, option) {
@@ -108,14 +105,14 @@ let DataEntryViewModel = function() {
       data: {user: JSON.stringify(payload)}
     })
     .done((data) => {
-      console.log(data);
+      //console.log(data);
       self.username("");
       self.givenName("");
       self.familyName("");
       self.password("");
       self.role("");
     });
-    console.log("save");
+    //console.log("save");
   }
 
   // initializing data
@@ -160,8 +157,6 @@ let DataEntryViewModel = function() {
     });
   });
 
-  self.blank = new Entry(blank);
-
   self.showHome = ko.observable(true);
   self.editEntry = ko.observable(null);
   self.copyOfEntryToEdit = null;
@@ -175,7 +170,7 @@ let DataEntryViewModel = function() {
   self.userGivenName = ko.observable();
   self.userId = ko.observable();
   getUser((user) => {
-    console.log("use", user.givenName);
+    //console.log("use", user.givenName);
     self.userGivenName(user.givenName);
     self.userId(user._id);
   });
@@ -183,7 +178,7 @@ let DataEntryViewModel = function() {
 
   let sort = false;
   self.sort = function(...sortFields) {
-    console.log("sorting");
+    //console.log("sorting");
     let inverse = 1;
     if (sort) inverse = -inverse;
     self.entries.sort((l, r) => {
@@ -209,13 +204,13 @@ let DataEntryViewModel = function() {
   }
 
   self.sortName = function(sortField) {
-    console.log("sorting");
+    //console.log("sorting");
     let inverse = 1;
     if (sort) inverse = -inverse;
     self.entries.sort((l, r) => {
       // this syntax is ugly, but it works
       let left = l(), right = r();
-      console.log(left.meta.identifier(), left.names.index(),left.names.values()[left.names.index()]);
+      //console.log(left.meta.identifier(), left.names.index(),left.names.values()[left.names.index()]);
       left = left.names.values()[left.names.index()][sortField];
       right = right.names.values()[right.names.index()][sortField];
       let s1 = left(),
@@ -296,30 +291,28 @@ let DataEntryViewModel = function() {
     }
   }
 
-  // hack-y function
-  let resetObservables = function(object, defaultValue) {
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        var property = object[key];
-        if (ko.isWriteableObservable(property)) {
-          property(defaultValue);
-        } else if (property instanceof Object) {
-          resetObservables(property, defaultValue);
-        }
-      }
-    }
-  }
+  // hack-y function BAD FUNCTION
+  // let resetObservables = function(object, defaultValue) {
+  //   for (var key in object) {
+  //     if (object.hasOwnProperty(key)) {
+  //       var property = object[key];
+  //       if (ko.isWriteableObservable(property)) {
+  //         property(defaultValue);
+  //       } else if (property instanceof Object) {
+  //         resetObservables(property, defaultValue);
+  //       }
+  //     }
+  //   }
+  // }
 
   self.newEntry = function() {
     // little hack to get all the properties attached to the viewmodels
     // without needing to predefine all of them in a model.js file
     // need edge case for empty entries
-    
-    let entryJS = ko.mapping.toJS(self.blank); //(self.entries() && self.entries()[0]));
-    let entry = ko.observable(new Entry(entryJS));
+    console.log("NEW ENTRY");
 
-    // NOTE: might not be needed now
-    resetObservables(entry, "");
+    let entry = ko.observable(new Entry(blank));
+    debugger;
 
     // set the default stage
     entry().meta.stage(DRAFT);
