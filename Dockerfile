@@ -10,4 +10,4 @@ ADD . .
 
 RUN ["yarn", "run", "bower"]
 
-CMD ["sh", "-c", "yarn run server-dev"]
+CMD ["sh", "-c", "yarn run start"]
