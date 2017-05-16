@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Indigenous Slave Trade Records</title>
+  <title>Database of Indigenous Slavery in the Americas</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -11,7 +11,7 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Indigenous Slave Trade Database</a>
+          <a class="navbar-brand" href="/">Database of Indigenous Slavery in the Americas</a>
         </div>
         <ul class="nav navbar-nav nav-tabs navbar-right">
           <li><a href="/">Dashboard</a></li>
@@ -120,18 +120,14 @@
           <em>Last Modified: <span data-bind="text: meta.lastModified()"></span></em>
         </section>
         <section id="date">
-          <div class="form-group">
-            <label for="year">Year:</label>
-            <input data-bind="value: date.year" name="year" class="form-control" />
-          </div>
+          <string-entry params="data: date.year, name: 'year', displayName: 'Year'"></string-entry>
+
           <div class="form-group">
             <label for="month">Month:</label>
             <select data-bind="options: $parent.monthOptions, optionsCaption: 'Select an item...', value: date.month" name="month" class="form-control"></select>
           </div>
-          <div class="form-group">
-            <label for="day">Day:</label>
-            <input data-bind="value: date.day" name="day" class="form-control" />
-          </div>
+
+          <string-entry params="data: date.day, name: 'day', displayName: 'Day'"></string-entry>
         </section>
         <section id="names">
           <article data-bind="foreach: {data: names.values(), as: 'name'}">
@@ -196,24 +192,11 @@
             <select data-bind="options: $parent.mannerOfEnslavementOptions, optionsCaption: 'Select an item...', value: mannerOfEnslavement" name="mannerOfEnslavement" class="form-control"></select>
           </div>
         </section>
-        <section id="stringLocation">
-          <div class="form-group">
-            <label for="stringLocation">Location:</label>
-            <input data-bind="value: stringLocation" name="stringLocation" class="form-control" />
-          </div>
-        </section>
-        <section id="colonyState">
-          <div class="form-group">
-            <label for="colonyState">Colony/State:</label>
-            <input data-bind="value: colonyState" name="colonyState" class="form-control" />
-          </div>
-        </section>
-        <section id="nationalContext">
-          <div class="form-group">
-            <label for="nationalContext">National Context:</label>
-            <input data-bind="value: nationalContext" name="nationalContext" class="form-control" />
-          </div>
-        </section>
+
+        <string-entry params="data: stringLocation, name: 'stringLocation', displayName: 'Location'"></string-entry>
+        <string-entry params="data: colonyState, name: 'colonyState', displayName: 'Colony/State'"></string-entry>
+        <string-entry params="data: nationalContext, name: 'nationalContext', displayName: 'National Context'"></string-entry>
+
         <section id="owner">
           <strong>Owner</strong><br>
           <div style="padding-left: 35px; padding-top: 10px;">

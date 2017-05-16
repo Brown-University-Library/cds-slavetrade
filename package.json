@@ -9,6 +9,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "base32": "^0.0.6",
     "bcryptjs": "^2.4.3",
     "bower": "^1.8.0",

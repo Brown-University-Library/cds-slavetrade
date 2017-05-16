@@ -9,6 +9,10 @@ const DRAFT = "Draft",
       PUBLIC = "Public",
       DELETED = "Deleted";
 
+// Loading necessary components
+import string_entry from '../components/string-entry.js';
+ko.components.register('string-entry', string_entry);
+
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
   // this should probably be changed, maybe use bower?
