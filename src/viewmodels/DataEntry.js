@@ -316,7 +316,6 @@ let DataEntryViewModel = function() {
     console.log("NEW ENTRY");
 
     let entry = ko.observable(new Entry(blank));
-    debugger;
 
     // set the default stage
     entry().meta.stage(DRAFT);
