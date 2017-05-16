@@ -280,10 +280,10 @@
         <section id="submission">
           <button data-bind="click: $parent.save" class="btn btn-success">Save</button>
           <button data-bind="click: (function(){
-            changeStage('Internal'); $parent.editEntry(null); $parent.showHome(true);
+            $parent.save($data); changeStage('Internal'); $parent.editEntry(null); $parent.showHome(true);
           })" class="btn btn-primary">Release to Team</button>
           <button data-bind="click: (function(){
-            changeStage('Public'); $parent.editEntry(null); $parent.showHome(true);
+            $parent.save($data); changeStage('Public'); $parent.editEntry(null); $parent.showHome(true);
           })" class="btn btn-primary">Release to Public</button>
           <button data-bind="click: $parent.cancel" class="btn btn-default">Cancel</button>
           <button data-bind="click: $parent.delete" class="btn btn-danger">Delete</button>
