@@ -10,6 +10,6 @@ ADD . .
 
 RUN ["yarn", "run", "bower"]
 
-RUN ["webpack"]
+RUN ["./node_modules/.bin/webpack"]
 
 CMD ["sh", "-c", "yarn run start"]
