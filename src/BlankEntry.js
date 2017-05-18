@@ -25,6 +25,7 @@ module.exports = {
   },
   "tribe" : "",
   "origin" : "",
+  "racialTag": "",
   "sex" : "",
   "age" : "",
   "mannerOfEnslavement" : "",

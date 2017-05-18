@@ -1,0 +1,137 @@
+<article id="entry" data-bind="with: data" class="container">
+  <form class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+      <section id="id"><h3>This is <span data-bind="text: displayId"></span></h3></section>
+      <section id="meta-data">
+        <em>Last Modified: <span data-bind="text: meta.lastModified()"></span></em>
+      </section>
+      <section id="date">
+        <string-entry params="data: date.year, name: 'year', displayName: 'Year'"></string-entry>
+
+        <div class="form-group">
+          <label for="month">Month:</label>
+          <select data-bind="options: $parent.monthOptions, optionsCaption: 'Select an item...', value: date.month" name="month" class="form-control"></select>
+        </div>
+
+        <string-entry params="data: date.day, name: 'day', displayName: 'Day'"></string-entry>
+      </section>
+      <section id="names">
+        <article data-bind="foreach: {data: names.values(), as: 'name'}">
+          <!-- ko if: $index() === $parent.names.index() -->
+          <div class="form-group">
+            <label for="firstName">Primary First Name:</label>
+            <input data-bind="value: name.firstName" name="firstName" class="form-control" />
+            <label for="lastName">Primary Last Name:</label>
+            <input data-bind="value: name.lastName" name="lastName" class="form-control" />
+            <button data-bind="click: $parent.makePrimaryName" class="btn btn-default">Make Primary</button>
+            <button data-bind="click: $parent.deleteName" class="btn btn-danger">Delete Name</button>
+          </div>
+          <!-- /ko -->
+          <!-- ko if: $index() !== $parent.names.index() -->
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input data-bind="value: name.firstName" name="firstName" class="form-control" />
+            <label for="lastName">Last Name:</label>
+            <input data-bind="value: name.lastName" name="lastName" class="form-control" />
+            <button data-bind="click: $parent.makePrimaryName" class="btn btn-default">Make Primary</button>
+            <button data-bind="click: $parent.deleteName" class="btn btn-danger">Delete Name</button>
+          </div>
+          <!-- /ko -->
+        </article>
+        <button data-bind="click: addName" class="btn btn-primary">Add Name</button>
+      </section>
+
+      <options-entry params="data: tribe, name: tribe, displayName: 'Tribe', options: $parent.tribeOptions"></options-entry>
+      <options-entry params="data: origin, name: origin, displayName: 'Origin', options: $parent.originOptions"></options-entry>
+      <options-entry params="data: racialTag, name: racialTag, displayName: 'Race', options: $parent.racialTagOptions"></options-entry>
+      <options-entry params="data: sex, name: sex, displayName: 'Sex', options: $parent.sexOptions"></options-entry>
+      <string-entry params="data: age, name: age, displayName: 'Age'"></string-entry>
+      <options-entry params="data: mannerOfEnslavement, name: mannerOfEnslavement, displayName: 'Type/Kind of Enslavement', options: $parent.mannerOfEnslavementOptions"></options-entry>
+      <string-entry params="data: stringLocation, name: 'stringLocation', displayName: 'Location'"></string-entry>
+      <string-entry params="data: colonyState, name: 'colonyState', displayName: 'Colony/State'"></string-entry>
+      <string-entry params="data: nationalContext, name: 'nationalContext', displayName: 'National Context'"></string-entry>
+
+      <section id="owner">
+        <strong>Owner</strong><br>
+        <div style="padding-left: 35px; padding-top: 10px;">
+          <div class="form-group">
+            <label for="ownerTitle">Title:</label>
+            <input data-bind="value: owner.title" name="ownerTitle" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="ownerGivenName">First Name:</label>
+            <input data-bind="value: owner.givenName" name="ownerGivenName" class="form-control" /><br>
+          </div>
+          <div class="form-group">
+            <label for="ownerFamilyName">Last Name:</label>
+            <input data-bind="value: owner.familyName" name="ownerFamilyName" class="form-control" /><br>
+          </div>
+        </div>
+      </section>
+      <section id="partner">
+        <strong>Partner</strong><br>
+        <div style="padding-left: 35px; padding-top: 10px;">
+          <div class="form-group">
+            <label for="partnerInDatabase">In Database:</label>
+            <input data-bind="value: partner.isDatabase" name="partnerInDatabase" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="partnerGivenName">First Name:</label>
+            <input data-bind="value: partner.givenName" name="partnerGivenName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="partnerFamilyName">Last Name:</label>
+            <input data-bind="value: partner.familyName" name="partnerFamilyName" class="form-control" />
+          </div>
+      </section>
+      <section id="dateOfRunaway">
+        <strong>Date of Runaway or Emancipation</strong><br><br>
+        <div style="padding-left: 35px; padding-top: 10px;">
+          <div class="form-group">
+            <label for="yearRunaway">Year:</label>
+            <input data-bind="value: dateOfRunaway.year" name="yearRunaway" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="monthRunaway">Month:</label>
+            <select data-bind="options: $parent.monthOptions, optionsCaption: 'Select an item...', value: dateOfRunaway.month" name="monthRunaway" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label for="dayRunaway">Day:</label>
+            <input data-bind="value: dateOfRunaway.day" name="dayRunaway" class="form-control" />
+          </div>
+        </div>
+      </section>
+
+      <string-entry params="data: sourceType, name: sourceType, displayName: 'Source Type'"></string-entry>
+      <string-entry params="data: recordType, name: recordType, displayName: 'Record Type'"></string-entry>
+      <string-entry params="data: citation, name: citation, displayName: 'Citation'"></string-entry>
+
+      <section id="additionalInfo">
+        <div class="form-group">
+          <label for="additionalInfo">Additional Info:</label>
+          <textarea data-bind="value: additionalInfo" name="additionalInfo" class="form-control"></textarea>
+        </div>
+      </section>
+      <section id="researcherNotes">
+        <div class="form-group">
+          <label for="researcherNotes">Researcher Notes:</label>
+          <textarea data-bind="value: researcherNotes" name="researcherNotes" class="form-control"></textarea>
+        </div>
+      </section>
+
+      <section id="submission">
+        <button data-bind="click: $parent.save" class="btn btn-success">Save</button>
+        <button data-bind="click: (function(){
+          $parent.save($data); changeStage('Internal'); $parent.editEntry(null); $parent.showHome(true);
+        })" class="btn btn-primary">Release to Team</button>
+        <button data-bind="click: (function(){
+          $parent.save($data); changeStage('Public'); $parent.editEntry(null); $parent.showHome(true);
+        })" class="btn btn-primary">Release to Public</button>
+        <button data-bind="click: $parent.cancel" class="btn btn-default">Cancel</button>
+        <button data-bind="click: $parent.delete" class="btn btn-danger">Delete</button>
+      </section>
+    </div>
+    <div class="col-xs-3"></div>
+  </form>
+</article>
