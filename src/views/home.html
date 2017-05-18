@@ -27,95 +27,15 @@
       <button data-bind="click: $root.newEntry" class="btn btn-primary">New Entry</button>
     </section>
     <section id="tables" class="row">
-      <article id="drafts" class="col-xs-12">
-        <h2>Drafts</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th data-bind="click: (function(){sort('displayId')})">ID</th>
-              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
-              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
-              <th data-bind="click: (function(){sort('dateString')})">Date</th>
-              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
-              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
-              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
-            </tr>
-          </thead>
-          <tbody data-bind="foreach: getEntries('Draft')">
-            <tr data-bind="click: $parent.edit">
-              <td data-bind="text: displayId"></td>
-              <td data-bind="text: displayFirstName"></td>
-              <td data-bind="text: displayLastName"></td>
-              <td data-bind="text: dateString"></td>
-              <td data-bind="text: colonyState"></td>
-              <td data-bind="text: meta.lastModified"></td>
-              <td data-bind="text: meta.updatedBy"></td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-      <article id="internal" class="col-xs-12">
-        <h2>Internal Entries</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th data-bind="click: (function(){sort('displayId')})">ID</th>
-              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
-              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
-              <th data-bind="click: (function(){sort('dateString')})">Date</th>
-              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
-              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
-              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
-            </tr>
-          </thead>
-          <tbody data-bind="foreach: getEntries('Internal')">
-            <tr data-bind="click: $parent.edit">
-              <td data-bind="text: displayId"></td>
-              <td data-bind="text: displayFirstName"></td>
-              <td data-bind="text: displayLastName"></td>
-              <td data-bind="text: dateString"></td>
-              <td data-bind="text: colonyState"></td>
-              <td data-bind="text: meta.lastModified"></td>
-              <td data-bind="text: meta.updatedBy"></td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-      <article id="public" class="col-xs-12">
-        <h2>Public Entries</h2>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th data-bind="click: (function(){sort('displayId')})">ID</th>
-              <th data-bind="click: (function(){sortName('firstName')})">First Name</th>
-              <th data-bind="click: (function(){sortName('lastName')})">Last Name</th>
-              <th data-bind="click: (function(){sort('dateString')})">Date</th>
-              <th data-bind="click: (function(){sort('stringLocation')})">Colony/State</th>
-              <th data-bind="click: (function(){sort('meta','lastModified')})">Last Modified</th>
-              <th data-bind="click: (function(){sort('meta','updatedBy')})">Updated By</th>
-            </tr>
-          </thead>
-          <tbody data-bind="foreach: getEntries('Public')">
-            <tr data-bind="click: $parent.edit">
-              <td data-bind="text: displayId"></td>
-              <td data-bind="text: displayFirstName"></td>
-              <td data-bind="text: displayLastName"></td>
-              <td data-bind="text: dateString"></td>
-              <td data-bind="text: colonyState"></td>
-              <td data-bind="text: meta.lastModified"></td>
-              <td data-bind="text: meta.updatedBy"></td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
+      <dashboard-table params="rows: getEntries('Draft'), displayName: 'Drafts', edit: edit, id: 'draft', sort: sort, sortName: sortName"></dashboard-table>
+      <dashboard-table params="rows: getEntries('Internal'), displayName: 'Internal Entries', edit: edit, id: 'internal', sort: sort, sortName: sortName"></dashboard-table>
+      <dashboard-table params="rows: getEntries('Public'), displayName: 'Public Entries', edit: edit, id: 'public', sort: sort, sortName: sortName"></dashboard-table>
     </section>
   </article>
 
   <div data-bind="with: $root.editEntry">
     <entry params="data: $data"></entry>
   </div>
-
-
 
   <footer>
 
