@@ -1,6 +1,3 @@
-import template from '../views/entry.html';
-import _ from 'lodash';
-
 let getCurrentDate = function() {
   let date = new Date();
   return date.toLocaleString("en-us");

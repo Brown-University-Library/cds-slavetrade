@@ -1,0 +1,6 @@
+<section data-bind="attr: {id:name}">
+  <div class="form-group">
+    <label data-bind="attr: {for:name}"><span data-bind="text: displayName"></span>:</label>
+    <select data-bind="options: dropDownOptions, optionsCaption: 'Select an item...', attr: {name:name}, value: data" class="form-control"></select>
+  </div>
+</section>
