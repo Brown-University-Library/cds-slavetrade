@@ -16,6 +16,8 @@ import options_entry from '../components/options-entry.js';
 ko.components.register('options-entry', options_entry);
 import entry from '../components/entry.js';
 ko.components.register('entry', entry);
+import dashboard_table from '../components/dashboard-table.js';
+ko.components.register('dashboard-table', dashboard_table);
 
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
