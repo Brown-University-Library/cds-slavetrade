@@ -11,7 +11,7 @@
 
         <div class="form-group">
           <label for="month">Month:</label>
-          <select data-bind="options: $parent.monthOptions, optionsCaption: 'Select an item...', value: date.month" name="month" class="form-control"></select>
+          <select data-bind="options: $parent.parent.monthOptions, optionsCaption: 'Select an item...', value: date.month" name="month" class="form-control"></select>
         </div>
 
         <string-entry params="data: date.day, name: 'day', displayName: 'Day'"></string-entry>
@@ -42,12 +42,12 @@
         <button data-bind="click: addName" class="btn btn-primary">Add Name</button>
       </section>
 
-      <options-entry params="data: tribe, name: tribe, displayName: 'Tribe', options: $parent.tribeOptions"></options-entry>
-      <options-entry params="data: origin, name: origin, displayName: 'Origin', options: $parent.originOptions"></options-entry>
-      <options-entry params="data: racialTag, name: racialTag, displayName: 'Race', options: $parent.racialTagOptions"></options-entry>
-      <options-entry params="data: sex, name: sex, displayName: 'Sex', options: $parent.sexOptions"></options-entry>
+      <options-entry params="data: tribe, name: tribe, displayName: 'Tribe', options: $parent.parent.tribeOptions"></options-entry>
+      <options-entry params="data: origin, name: origin, displayName: 'Origin', options: $parent.parent.originOptions"></options-entry>
+      <options-entry params="data: racialTag, name: racialTag, displayName: 'Race', options: $parent.parent.racialTagOptions"></options-entry>
+      <options-entry params="data: sex, name: sex, displayName: 'Sex', options: $parent.parent.sexOptions"></options-entry>
       <string-entry params="data: age, name: age, displayName: 'Age'"></string-entry>
-      <options-entry params="data: mannerOfEnslavement, name: mannerOfEnslavement, displayName: 'Type/Kind of Enslavement', options: $parent.mannerOfEnslavementOptions"></options-entry>
+      <options-entry params="data: mannerOfEnslavement, name: mannerOfEnslavement, displayName: 'Type/Kind of Enslavement', options: $parent.parent.mannerOfEnslavementOptions"></options-entry>
       <string-entry params="data: stringLocation, name: 'stringLocation', displayName: 'Location'"></string-entry>
       <string-entry params="data: colonyState, name: 'colonyState', displayName: 'Colony/State'"></string-entry>
       <string-entry params="data: nationalContext, name: 'nationalContext', displayName: 'National Context'"></string-entry>
@@ -94,7 +94,7 @@
           </div>
           <div class="form-group">
             <label for="monthRunaway">Month:</label>
-            <select data-bind="options: $parent.monthOptions, optionsCaption: 'Select an item...', value: dateOfRunaway.month" name="monthRunaway" class="form-control"></select>
+            <select data-bind="options: $parent.parent.monthOptions, optionsCaption: 'Select an item...', value: dateOfRunaway.month" name="monthRunaway" class="form-control"></select>
           </div>
           <div class="form-group">
             <label for="dayRunaway">Day:</label>
@@ -121,15 +121,15 @@
       </section>
 
       <section id="submission">
-        <button data-bind="click: $parent.save" class="btn btn-success">Save</button>
+        <button data-bind="click: $parent.parent.save" class="btn btn-success">Save</button>
         <button data-bind="click: (function(){
-          $parent.save($data); changeStage('Internal'); $parent.editEntry(null); $parent.showHome(true);
+          $parent.parent.save($data); changeStage('Internal'); $parent.parent.editEntry(null); $parent.parent.showHome(true);
         })" class="btn btn-primary">Release to Team</button>
         <button data-bind="click: (function(){
-          $parent.save($data); changeStage('Public'); $parent.editEntry(null); $parent.showHome(true);
+          $parent.parent.save($data); changeStage('Public'); $parent.parent.editEntry(null); $parent.parent.showHome(true);
         })" class="btn btn-primary">Release to Public</button>
-        <button data-bind="click: $parent.cancel" class="btn btn-default">Cancel</button>
-        <button data-bind="click: $parent.delete" class="btn btn-danger">Delete</button>
+        <button data-bind="click: $parent.parent.cancel" class="btn btn-default">Cancel</button>
+        <button data-bind="click: $parent.parent.delete" class="btn btn-danger">Delete</button>
       </section>
     </div>
     <div class="col-xs-3"></div>

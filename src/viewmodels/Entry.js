@@ -4,7 +4,6 @@ let getCurrentDate = function() {
 }
 
 const blank = require('../BlankEntry.js');
-console.log("BLANK3", blank);
 
 let EntryViewModel = function(data) {
   let self = this;
