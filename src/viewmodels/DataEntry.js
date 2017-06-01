@@ -12,6 +12,8 @@ const DRAFT = "Draft",
 // Loading necessary components
 import string_entry from '../components/string-entry.js';
 ko.components.register('string-entry', string_entry);
+import text_entry from '../compoents/text-entry.js';
+ko.components.register('text-entry', text_entry);
 import options_entry from '../components/options-entry.js';
 ko.components.register('options-entry', options_entry);
 import entry from '../components/entry.js';
