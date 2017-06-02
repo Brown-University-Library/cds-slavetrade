@@ -342,3 +342,5 @@ let DataEntryViewModel = function() {
 }
 
 ko.applyBindings(new DataEntryViewModel());
+
+expandTextareas();
