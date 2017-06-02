@@ -21,6 +21,15 @@ ko.components.register('entry', entry);
 import dashboard_table from '../components/dashboard-table.js';
 ko.components.register('dashboard-table', dashboard_table);
 
+ko.bindingHandlers.expandTextareas = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext){
+        // This will be called when the binding is first applied to an element
+        // Set up any initial state, event handlers, etc. here
+        console.log(element);
+        expandTextarea(element);
+    }
+};
+
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
   // this should probably be changed, maybe use bower?
@@ -339,8 +348,11 @@ let DataEntryViewModel = function() {
     // hide the tables and welcome message
     self.showHome(false);
   }
+
+  let afterRenderCallback = function() {
+    // this method will be called after content rendered
+    alert("finished renedering");
+  }
 }
 
 ko.applyBindings(new DataEntryViewModel());
-
-expandTextareas();
