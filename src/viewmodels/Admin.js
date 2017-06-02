@@ -1,5 +1,7 @@
 import { getOptions, getUser } from '../utils/utils.js';
 
+import name_banner from '../components/name-banner.js';
+ko.components.register('name-banner', name_banner);
 import admin_dashboard_element from '../components/admin-dashboard-element.js';
 ko.components.register('admin-dashboard-element', admin_dashboard_element);
 
