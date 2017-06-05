@@ -12,12 +12,23 @@ const DRAFT = "Draft",
 // Loading necessary components
 import string_entry from '../components/string-entry.js';
 ko.components.register('string-entry', string_entry);
+import text_entry from '../components/text-entry.js';
+ko.components.register('text-entry', text_entry);
 import options_entry from '../components/options-entry.js';
 ko.components.register('options-entry', options_entry);
 import entry from '../components/entry.js';
 ko.components.register('entry', entry);
 import dashboard_table from '../components/dashboard-table.js';
 ko.components.register('dashboard-table', dashboard_table);
+
+ko.bindingHandlers.expandTextareas = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext){
+        // This will be called when the binding is first applied to an element
+        // Set up any initial state, event handlers, etc. here
+        console.log(element);
+        expandTextarea(element);
+    }
+};
 
 let getEntries = function(callback) {
   // NOTE: $ (jQuery) is in scope because it is in a script tag in home.html
@@ -336,6 +347,11 @@ let DataEntryViewModel = function() {
     self.editEntry(entry());
     // hide the tables and welcome message
     self.showHome(false);
+  }
+
+  let afterRenderCallback = function() {
+    // this method will be called after content rendered
+    alert("finished renedering");
   }
 }
 

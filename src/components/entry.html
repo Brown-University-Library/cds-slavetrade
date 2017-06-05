@@ -107,18 +107,8 @@
       <string-entry params="data: recordType, name: recordType, displayName: 'Record Type'"></string-entry>
       <string-entry params="data: citation, name: citation, displayName: 'Citation'"></string-entry>
 
-      <section id="additionalInfo">
-        <div class="form-group">
-          <label for="additionalInfo">Additional Info:</label>
-          <textarea data-bind="value: additionalInfo" name="additionalInfo" class="form-control"></textarea>
-        </div>
-      </section>
-      <section id="researcherNotes">
-        <div class="form-group">
-          <label for="researcherNotes">Researcher Notes:</label>
-          <textarea data-bind="value: researcherNotes" name="researcherNotes" class="form-control"></textarea>
-        </div>
-      </section>
+      <text-entry params="data: additionalInfo, name: additionalInfo, displayName: 'Additional Info'"></text-entry>
+      <text-entry params="data: researcherNotes, name: researcherNotes, displayName: 'Researcher Notes'"></text-entry>
 
       <section id="submission">
         <button data-bind="click: $parent.parent.save" class="btn btn-success">Save</button>
