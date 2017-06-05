@@ -3,7 +3,8 @@ const Path = require('path');
 
 module.exports = {
   entry: {
-    home: Path.resolve(__dirname, 'src/viewmodels/DataEntry.js')
+    home: Path.resolve(__dirname, 'src/viewmodels/DataEntry.js'),
+    admin: Path.resolve(__dirname, 'src/viewmodels/Admin.js')
   },
   output: {
     path: Path.resolve(__dirname, 'dist', 'client'),
