@@ -1,0 +1,19 @@
+version: 0.2
+
+env:
+  variables:
+
+phases:
+  install:
+    commands:
+      - ./install.sh
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./node_modules/.bin/webpack
+  post_build:
+    commands:
+      - echo Build completed on `date`
