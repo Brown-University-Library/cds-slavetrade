@@ -18,4 +18,5 @@ phases:
       - docker build -t $DOCKER_REPOSITORY/$DOCKER_IMAGE:$DOCKER_TAG .
   post_build:
     commands:
+      - docker push $DOCKER_REPOSITORY/$DOCKER_IMAGE:$DOCKER_TAG
       - echo Build completed on `date`
