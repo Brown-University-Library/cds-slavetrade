@@ -6,15 +6,9 @@ env:
     DOCKER_IMAGE: "cds-slavetrade"
 
 phases:
-  pre_install:
-    commands:
-      - echo Nothing to do in the pre-install phase...
   install:
     commands:
       - echo Nothing to do in the install phase...
-  post_install:
-    commands:
-      - echo Nothing to do in the post-install phase...
   pre_build:
     commands:
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
