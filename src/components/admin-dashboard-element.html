@@ -1,5 +1,47 @@
 <section data-bind="attr: {id:name}">
-  <div class="admin-dashboard-element">
-    <span data-bind="text: displayName"></span>
+  <div class="card">
+    <h4 class="card-header" style="background-color: #5f0c20; color: rgba(255, 255, 255, 0.9);">
+      <span data-bind="text: title"></span> Options
+    </h4>
+    <div class="card-block">
+      <ul class="p-1" data-bind="foreach: options">
+        <li style="list-style-type:none;"><span data-bind="text: $data"></span></li>
+      </ul>
+      <button type="button" class="btn btn-primary collapsed" data-toggle="modal" data-bind="attr: {'data-target':nameModalReference}">
+        Edit
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div data-bind="attr: {id:nameModal, 'aria-labelledby':nameModalLabel}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 data-bind="attr: {id:nameModalLabel}" class="modal-title">
+            <span data-bind="text: title"></span> Options
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="p-0" data-bind="foreach: options">
+            <li style="list-style-type:none">
+              <div class="input-group">
+                <input data-bind="input: $rawData" class="form-control" />
+                <span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, name)" class="btn btn-danger">Delete</button>
+              </div>
+            </li>
+          </ul>
+          <button class="btn btn-primary" data-bind="click: $root.addOption.bind(null, name)">Add Option</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" data-bind="click: $root.saveOptions">Save Changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

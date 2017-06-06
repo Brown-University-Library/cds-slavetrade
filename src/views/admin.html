@@ -3,117 +3,77 @@
 <head>
   <title>Database of Indigenous Slavery in the Americas - Admin</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha256-gL1ibrbVcRIHKlCO5OXOPC/lZz/gpdApgQAzskqqXp8=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/5699cdb406.js"></script>
   <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
 </head>
 <body>
   <header>
-    <nav class="nav nav-tabs navbar-toggleable-md">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top" style="background-color: #5f0c20;">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="/">Database of Indigenous Slavery in the Americas</a>
-      <div id="navbarNavDropdown" class="navbar-collapse collapse">
-        <ul class="navbar-nav">
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav mr-3">
           <li class="nav-item">
             <a class="nav-link" href="/">Dashboard</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin">Admin</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin">Admin <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Logout</a>
+            <a class="nav-link disabled" href="#">Log Out</a>
           </li>
         </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Does not work yet">
+          <button class="btn btn-outline-default my-2 my-sm-0 disabled" type="button">Search</button>
+        </form>
       </div>
     </nav>
   </header>
-  <div class="container">
-    <name-banner params="userGivenName: userGivenName, underText: 'Welcome to the admin page. Use the power responsibly.'"></name-banner>
-    
-    <!--<admin-dashboard-element></admin-dashboard-element>-->
-  
-  </div>
-  <article id="adminPanel" class="container">
-    <div class="row">
-      <div class="col-xs-3"></div>
-      <section id="dropdownOptions" class="col-xs-6">
-        <!-- TODO: I would love to make these templates or bindings -->
-        <h2>Drop Down Options</h2>
-        <article class="row">
-          <div class="form-group">
-            <h3>Sex</h3>
-            <ul data-bind="foreach: sexOptions">
-              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'sex')" class="btn btn-danger">DELETE</button></span></div></li>
-            </ul>
-            <button data-bind="click: function() {addOption('sex')}" class="btn btn-default">Add Sex Option</button>
-          </div>
-        </article>
-        <article class="row">
-          <div class="form-group">
-            <h3>Tribe</h3>
-            <ul data-bind="foreach: tribeOptions">
-              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'tribe')" class="btn btn-danger">DELETE</button></span></div></li>
-            </ul>
-            <button data-bind="click: function() {addOption('tribe')}" class="btn btn-default">Add Tribe Option</button>
-          </div>
-        </article>
-        <article class="row">
-          <div class="form-group">
-            <h3>Origin</h3>
-            <ul data-bind="foreach: originOptions">
-              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
-            </ul>
-            <button data-bind="click: function() {addOption('origin')}" class="btn btn-default">Add Origin Option</button>
-          </div>
-        </article>
-        <article class="row">
-          <div class="form-group">
-            <h3>Racial Tag</h3>
-            <ul data-bind="foreach: racialTagOptions">
-              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'racialTag')" class="btn btn-danger">DELETE</button></span></div></li>
-            </ul>
-            <button data-bind="click: function() {addOption('racialTag')}" class="btn btn-default">Add Origin Option</button>
-          </div>
-        </article>
-        <article class="row">
-          <div class="form-group">
-            <h3>Type/Kind of Enslavement</h3>
-            <ul data-bind="foreach: mannerOfEnslavementOptions">
-              <li style="list-style-type:none"><div class="input-group"><input data-bind="textInput: $rawData, event: {keyup: $root.saveOptions}" class="form-control" /><span class="input-group-btn"><button data-bind="click: $root.deleteOption.bind(this, 'origin')" class="btn btn-danger">DELETE</button></span></div></li>
-            </ul>
-            <button data-bind="click: function() {addOption('mannerOfEnslavement')}" class="btn btn-default">Add Type/Kind of Enslavement Option</button>
-          </div>
-        </article>
-      </section>
-      <div class="col-xs-3"></div>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-3"></div>
-      <section id="users" class="col-xs-6">
-        <h2>New User</h2>
-        <article class="row">
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <input data-bind="value: username" name="username" class="form-control" />
-            <label for="givenName">Given Name:</label>
-            <input data-bind="value: givenName" name="givenName" class="form-control" />
-            <label for="familyName">Family Name:</label>
-            <input data-bind="value: familyName" name="familyName" class="form-control" />
-            <label for="pass">Password:</label>
-            <input data-bind="value: password" name="pass" class="form-control" />
-            <label for="role">Role: (put "Admin" without quotes)</label>
-            <input data-bind="value: role" name="role" class="form-control" />
-            <button data-bind="click: newUser" class="btn btn-primary">Add</button>
-          </div>
-        </article>
-      </section>
-      <div class="col-xs-3"></div>
+  <article class="container pt-5" style="margin-top:56px;">
+    <name-banner params="userGivenName: userGivenName, underText: 'Welcome to the admin page. Use the power responsibly.'"></name-banner>
+
+    <h2>
+      Dropdown Options Menu
+      <button class="btn btn-default btn-flip collapsed" type="button" data-toggle="collapse" data-target="#dropdownOptions" aria-expanded="false" aria-controls="collapseExample">
+        <span class="fa fa-chevron-up"></span>
+      </button>
+    </h2>
+    <div id="dropdownOptions" class="collapse">
+      <div class="card-columns">
+        <admin-dashboard-element params="options: sexOptions, title: 'Sex', name: 'sex'"></admin-dashboard-element>
+        <admin-dashboard-element params="options: tribeOptions, title: 'Tribe', name: 'tribe'"></admin-dashboard-element>
+        <admin-dashboard-element params="options: originOptions, title: 'Origin', name: 'origin'"></admin-dashboard-element>
+        <admin-dashboard-element params="options: racialTagOptions, title: 'Race', name: 'racialTag'"></admin-dashboard-element>
+        <admin-dashboard-element params="options: mannerOfEnslavementOptions, title: 'Type/Kind of Enslavement', name: 'mannerOfEnslavement'"></admin-dashboard-element>
+      </div>
     </div>
+    <hr>
+
+    <h2>Tool Tips Menu</h2>
+
+    <hr>
+
+    <h2>
+      Users Menu
+      <button class="btn btn-default btn-flip collapsed" type="button" data-toggle="collapse" data-target="#userOptions" aria-expanded="false" aria-controls="collapseExample">
+        <span class="fa fa-chevron-up"></span>
+      </button>
+    </h2>
+    <div id="userOptions" class="collapse">
+      <new-user-card params="username: username"></new-user-card>
+    </div>
+    <hr>
+
   </article>
 
   <footer>

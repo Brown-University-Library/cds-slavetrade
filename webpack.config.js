@@ -23,6 +23,9 @@ module.exports = {
       },
       {
         from: Path.resolve(__dirname, 'src/client/js/auto-expand.js')
+      },
+      {
+        from: Path.resolve(__dirname, 'src/client/css/style.css')
       }
     ])
   ],
@@ -34,7 +37,7 @@ module.exports = {
       },
       {
         test   : /.js$/,
-        loader : 'babel-loader' 
+        loader : 'babel-loader'
       }
     ]
   },

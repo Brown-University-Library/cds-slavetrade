@@ -4,6 +4,8 @@ import name_banner from '../components/name-banner.js';
 ko.components.register('name-banner', name_banner);
 import admin_dashboard_element from '../components/admin-dashboard-element.js';
 ko.components.register('admin-dashboard-element', admin_dashboard_element);
+import new_user_card from '../components/new-user-card.js';
+ko.components.register('new-user-card', new_user_card);
 
 let AdminViewModel = function() {
   let self = this;
@@ -14,12 +16,13 @@ let AdminViewModel = function() {
   self.originOptions = ko.observableArray();
   self.mannerOfEnslavementOptions = ko.observableArray();
   self.racialTagOptions = ko.observableArray();
+
   self.addOption = function(category) {
     let listToAdd = self[category + 'Options'];
     listToAdd.push(ko.observable());
   }
 
-  self.saveOptions = function() {
+  self.saveOptions = function(category, options) {
     let payload = {
       sex: ko.mapping.toJS(self.sexOptions),
       month: ko.mapping.toJS(self.monthOptions),
@@ -28,6 +31,7 @@ let AdminViewModel = function() {
       mannerOfEnslavement: ko.mapping.toJS(self.mannerOfEnslavementOptions),
       racialTag: ko.mapping.toJS(self.racialTagOptions)
     };
+    payload[category] = ko.mapping.toJS(options);
     $.ajax({
       url: "/api/v1/options",
       method: "PUT",
@@ -36,7 +40,7 @@ let AdminViewModel = function() {
     .done((data) => {
       //console.log(data);
     });
-    //console.log("save");
+    console.log("save");
   }
 
   self.deleteOption = function(category, option) {
@@ -80,6 +84,7 @@ let AdminViewModel = function() {
   // initializing data
   getOptions((options) => {
     for (let i = 0; i < options.sex.length; ++i) {
+      console.log("working", options.sex[i]);
       self.sexOptions.push(ko.observable(options.sex[i]));
     }
     for (let i = 0; i < options.month.length; ++i) {
@@ -102,10 +107,11 @@ let AdminViewModel = function() {
   self.userGivenName = ko.observable();
   self.userId = ko.observable();
   getUser((user) => {
-    //console.log("use", user.givenName);
     self.userGivenName(user.givenName);
     self.userId(user._id);
   });
+
+  console.log(self.sexOptions()[0]);
 }
 
 ko.applyBindings(new AdminViewModel());

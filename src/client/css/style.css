@@ -1,3 +1,17 @@
 .admin-dashboard-element {
-  
+
+}
+
+body {
+  background-color: rgba(41,19,19,0.05);
+}
+
+button[data-toggle='collapse'].btn.btn-flip.collapsed span {
+    /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+    -webkit-transform: rotate(180deg);
+    -moz-transform:    rotate(180deg);
+    -ms-transform:     rotate(180deg);
+    -o-transform:      rotate(180deg);
+    transform:         rotate(180deg);
+    padding-bottom: 3px;
 }
