@@ -1,16 +1,27 @@
 version: 0.2
 
+env:
+  variables:
+    DOCKER_REPOSITORY: "colehansen"
+    DOCKER_IMAGE: "cds-slavetrade"
+
 phases:
+  pre_install:
+    commands:
+      - echo Nothing to do in the pre-install phase...
   install:
     commands:
-      - ./install.sh
+      - echo Nothing to do in the install phase...
+  post_install:
+    commands:
+      - echo Nothing to do in the post-install phase...
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   build:
     commands:
       - echo Build started on `date`
-      - ./node_modules/.bin/webpack
+      - docker build -t $DOCKER_REPOSITORY/$DOCKER_IMAGE:$DOCKER_TAG .
   post_build:
     commands:
       - echo Build completed on `date`
